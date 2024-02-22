@@ -50,7 +50,9 @@
   }
 
   .highlight .gd {
-    color: #82071e;
+    // color: #82071e;
+    // color: var(--code-color);
+    color: #0550ae;
     background-color: #ffebe9;
   }
 
@@ -172,7 +174,8 @@
 
   .highlight .err {
     color: #f6f8fa;
-    background-color: #82071e;
+    color: #0550ae;
+    // background-color: #82071e;
   }
 
   .highlight .c,

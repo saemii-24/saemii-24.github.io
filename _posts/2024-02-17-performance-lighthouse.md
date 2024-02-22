@@ -1,5 +1,6 @@
 ---
 title: "Lighthouse에 대해 알아보자"
+author: saemii
 categories:
   - Performance
 tags:

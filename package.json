@@ -36,7 +36,7 @@
     "stylelint-config-standard-scss": "^13.0.0"
   },
   "prettier": {
-    "trailingComma": "none"
+    "semi": false
   },
   "browserslist": [
     "last 2 versions",
