@@ -64,7 +64,8 @@ pin: true
 그 다음 gitignore에서 `assets/js/dist` 이 부분을 주석처리 해준다.
 
 ```bash
-npm install && npm run build
+npm install
+npm run build
 ```
 
 ## ✅exit code 16 Error
