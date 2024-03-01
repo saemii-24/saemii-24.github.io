@@ -12,7 +12,7 @@ pin: true
 
 ## 📌시작하며
 
-프로젝트를 시작하고 Tailwind를 사용하다 보니 자꾸 똑같은 속성의 클래스명을 헷갈려서, 한 번 정리하면 좋을 것 같아 포스팅을 작성한다.
+프로젝트를 시작하고 Tailwind를 사용하다 보니 자꾸 똑같은 속성의 클래스명을 헷갈려서, 자주 쓰는 내용을 정리해보면 좋을 것 같아 포스팅을 작성한다.
 
 > 이 글은 아래와 같이 이어집니다.
 >
@@ -20,71 +20,225 @@ pin: true
 > - [TailwindCSS 세팅(2)](https://saemii-24.github.io/posts/tailwindcss-2/)
 > - [TailwindCSS 세팅(3)](https://saemii-24.github.io/posts/tailwindcss-3/)
 
-## ✅ 필요한 color 추가하기
+## 🅰️ font
 
-tailwind 에서 기본으로 제공하는 color도 충분히 예쁘지만, 내 프로젝트에는 맞지 않을 수 있다. 이럴 땐 color 값을 추가해주면 된다. 나는 `music` 이란 이름으로 컬러값들을 추가해주었다. 직접 적용할 때는 `bg-music-100` 이런식으로 적용하면 된다.
+<table>
+  <tr>
+    <th>속성</th>
+    <th>작성법</th>
+  </tr>
+  <tr>
+    <td>Font Size</td>
+    <td>text-[xs~9xl]</td>
+  </tr>
+  <tr>
+    <td>Font Weight</td>
+    <td>text-[thin~black]</td>
+  </tr>
+  <tr>
+    <td>Letter Spacing</td>
+    <td>tracking-[tighter~widest]</td>
+  </tr>
+  <tr>
+    <td>Line Height</td>
+    <td>leading-[3~10]</td>
+  </tr>
+  <tr>
+    <td>Text align</td>
+    <td>text-[left~end]</td>
+  </tr>
+  <tr>
+    <td>Text Overflow</td>
+    <td>truncate, text-ellipsis, text-clip</td>
+  </tr>
+</table>
 
-```typescript
-import type { Config } from "tailwindcss"
+## ✒️border
 
-const config: Config = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    extend: {
-    colors: {
-      music: { 👈
-        100: "#E9F6FC",
-        //여기에 더 추가해주면 된다.
-      },
-    },
-  },
-}
-export default config
-```
+<table>
+  <tr>
+    <th>속성</th>
+    <th>작성법</th>
+  </tr>
+  <tr>
+    <td>Border Radius</td>
+    <td>rounded-[md~full]</td>
+  </tr>
+    <tr>
+    <td>Border Width</td>
+    <td>border-[0~8 (2씩 증가)]</td>
+  </tr>
+    <tr>
+    <td>Border Color</td>
+    <td>border-[color]</td>
+  </tr>
+</table>
 
-## ✅ 기본 color 함께 사용하기
+## 📐Layout
 
-그런데 위의 내용까지만 하고 끝내면 문제가 발생한다. 나는 gray나 black계열은 그대로 사용할 생각이었는데, 저렇게 color를 작성하면 기존의 color값들은 사용이 불가능해진다.
-하지만 친절한 tailwind는 기존 color 값도 사용할 수 있도록 제시해준다.
+<table>
+  <tr>
+    <th>속성</th>
+    <th>작성법</th>
+  </tr>
+  <tr>
+    <td>Aspect Ratio</td>
+    <td>aspect-[auto, squre, video]</td>
+  </tr>
+  <tr>
+    <td>Position</td>
+    <td>static, fixed, absolute, relatvie, sticky</td>
+  </tr>
+  <tr>
+    <td>Top / Right / Bottom / Left</td>
+    <td>inset-[number] / 방향-[number]</td>
+  </tr>
+  <tr>
+    <td>Visibility</td>
+    <td>visible, invisible, collapse</td>
+  </tr>
+  <tr>
+    <td>Z-Index</td>
+    <td>z-[number]</td>
+  </tr>
+  <tr>
+    <td>Overflow</td>
+    <td>overflow-[auto, hidden, scroll]</td>
+  </tr>
+  <tr>
+    <td>Display</td>
+    <td>block, inline-block, flex, grid, table</td>
+  </tr>
+</table>
 
-```typescript
-import colors from "tailwindcss/colors"  👈
+## 🎁Size
 
-const config: Config = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    colors: {  👈
-      //기존값들을 불러와준다.
-      transparent: "transparent",
-      current: "currentColor",
-      black: colors.black,
-      white: colors.white,
-      gray: colors.gray,
-      emerald: colors.emerald,
-      indigo: colors.indigo,
-      yellow: colors.yellow,
-      music: {
-        100: "#E9F6FC",
-        //이 부분은 커스텀
-      },
-    },
-  },
-}
-export default config
-```
+<table>
+  <tr>
+    <th>속성</th>
+    <th>작성법</th>
+  </tr>
+  <tr>
+    <td>Width / Height</td>
+    <td>w-[number] h-[number]</td>
+  </tr>
+   <tr>
+    <td>Min - Width / Height</td>
+    <td>min-w-[number], min-h-[number]</td>
+  </tr>
+   <tr>
+    <td>Max - Width / Height</td>
+    <td>max-w-[number], max-h-[number]</td>
+  </tr>
+</table>
+
+## ❤️Flex
+
+<table>
+  <tr>
+    <th>속성</th>
+    <th>작성법</th>
+  </tr>
+  <tr>
+    <td>Flex Wrap</td>
+    <td>flex-wrap, flex-wrap-reverse, flex-nowrap</td>
+  </tr>
+  <tr>
+    <td>Flex Grow</td>
+    <td>grow, grow-0</td>
+  </tr>
+  <tr>
+    <td>Flex Shrink</td>
+    <td>shrink, shrink-0</td>
+  </tr>
+  <tr>
+    <td>Flex Basis</td>
+    <td>basis-[number]</td>
+  </tr>
+  <tr>
+    <td>Order</td>
+    <td>order-[number]</td>
+  </tr>
+  <tr>
+    <td>Justify Content</td>
+    <td>justify-[normal, start, end, between, center]</td>
+  </tr>
+  <tr>
+    <td>Justify Items</td>
+    <td>justify-items-[start, end, center]</td>
+  </tr>
+  <tr>
+    <td>Align Content</td>
+    <td>Content-[normal, start, end, between, center]</td>
+  </tr>
+  <tr>
+    <td>Align Items</td>
+    <td>items-[start, end, center]</td>
+  </tr>
+</table>
+
+## 🍀Grid
+
+<table>
+  <tr>
+    <th>속성</th>
+    <th>작성법</th>
+  </tr>
+  <tr>
+    <td>Grid Template Columns</td>
+    <td>grid-cols-[number]</td>
+  </tr>
+  <tr>
+    <td>Grid Template Rows</td>
+    <td>grid-rows-[number]</td>
+  </tr>
+  <tr>
+    <td>Grid Column Start / End</td>
+    <td>col-auto<br/> col-span-[number] <br/>
+        col-start-[number]<br/>col-end-[number]
+    </td>
+  </tr>
+</table>
+
+## 💟Container
+
+사이즈별 다른 속성 작성시 작은 것 부터 적용된다. 즉 small 사이즈 속성이 default가 되고 large 사이즈를 추가적으로 작성해야 하는 것이다. 예를들어 `bg-slate-100 lg:bg-slate-500` 로 작성하면 100이 default 값, lg일때 500값으로 덮어 씌운다.
+
+<table>
+  <tr>
+    <th>Breakpoint</th>
+    <th>Properties</th>
+  </tr>
+  <tr>
+    <td>None</td>
+    <td>width: 100%;</td>
+  </tr>
+  <tr>
+    <td>sm (640px)</td>
+    <td>max-width: 640px;</td>
+  </tr>
+  <tr>
+    <td>md (768px)</td>
+    <td>max-width: 768px;</td>
+  </tr>
+  <tr>
+    <td>lg (1024px)</td>
+    <td>max-width: 1024px;</td>
+  </tr>
+  <tr>
+    <td>xl (1280px)</td>
+    <td>max-width: 1280px;</td>
+  </tr>
+  <tr>
+    <td>2xl (1536px)</td>
+    <td>max-width: 1536px;</td>
+  </tr>
+</table>
 
 ## 📩마무리
 
-다음엔 자주 사용하는 css 내용을 정리해보고자 한다!
+tailwind의 class 자체가 직관적이기 때문에 지금은 헷갈려도, 계속 쓰다보면 바로바로 떠올릴 수 있을 것 같다! 🥰
 
 ## 🗂️참고 사이트
 
-- <https://tailwindcss.com/docs/customizing-colors>
+- <https://tailwindcss.com/docs/installation>
