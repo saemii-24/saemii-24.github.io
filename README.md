@@ -1,81 +1,19 @@
-<div align="center">
+## ✒️saemii-blog
 
-  # Chirpy Jekyll Theme
+jeykll과 Github Page를 이용해 제작한 개인 블로그 입니다. 주로 관심있는 기술들의 공식 문서와 예제를 살펴보며 개인적으로 공부한 내용을 정리하고 있습니다.
 
-  A minimal, responsive, and feature-rich Jekyll theme for technical writing.
+**[블로그](https://saemii-24.github.io/)** 👈바로가기
 
-  [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy?color=brightgreen)][gem]&nbsp;
-  [![CI](https://github.com/cotes2020/jekyll-theme-chirpy/actions/workflows/ci.yml/badge.svg?branch=master&event=push)][ci]&nbsp;
-  [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4e556876a3c54d5e8f2d2857c4f43894)][codacy]&nbsp;
-  [![GitHub license](https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy.svg)][license]&nbsp;
-  [![996.icu](https://img.shields.io/badge/link-996.icu-%23FF4D5B.svg)](https://996.icu)
+<u>따라서, 작성 된 내용이 정확하지 않을 수 있습니다.</u>
 
-  [**Live Demo** →][demo]
+## ⚙️깃 컨벤션
 
-  [![Devices Mockup](https://chirpy-img.netlify.app/commons/devices-mockup.png)][demo]
+주 사용 컨벤션은 다음과 같습니다.
 
-</div>
-
-## Features
-
-- Dark / Light Theme Mode
-- Localized UI language
-- Pinned Posts on Home Page
-- Hierarchical Categories
-- Trending Tags
-- Table of Contents
-- Last Modified Date
-- Syntax Highlighting
-- Mathematical Expressions
-- Mermaid Diagrams & Flowcharts
-- Dark / Light Mode Images
-- Embed Videos
-- Disqus / Giscus / Utterances Comments
-- Built-in Search
-- Atom Feeds
-- PWA
-- Google Analytics / GoatCounter
-- SEO & Performance Optimization
-
-## Documentation
-
-To learn how to use, develop, and upgrade the project, please refer to the [Wiki][wiki].
-
-## Contributing
-
-Contributions (_pull requests_, _issues_, and _discussions_) are what make the open-source community such an amazing place
-to learn, inspire, and create. Any contributions you make are greatly appreciated.
-For details, see the "[Contributing Guidelines][contribute-guide]".
-
-## Credits
-
-### Contributors
-
-Thanks to [all the contributors][contributors] involved in the development of the project!
-
-[![all-contributors](https://contrib.rocks/image?repo=cotes2020/jekyll-theme-chirpy&columns=16)][contributors]
-<sub> —— Made with [contrib.rocks](https://contrib.rocks)</sub>
-
-### Third-Party Assets
-
-This project is built on the [Jekyll][jekyllrb] ecosystem and some [great libraries][lib], and is developed using [VS Code][vscode] as well as tools provided by [JetBrains][jetbrains] under a non-commercial open-source software license.
-
-The avatar and favicon for the project's website are from [ClipartMAX][clipartmax].
-
-## License
-
-This project is published under [MIT License][license].
-
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[ci]: https://github.com/cotes2020/jekyll-theme-chirpy/actions/workflows/ci.yml?query=event%3Apush+branch%3Amaster
-[codacy]: https://app.codacy.com/gh/cotes2020/jekyll-theme-chirpy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade
-[license]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE
-[jekyllrb]: https://jekyllrb.com/
-[clipartmax]: https://www.clipartmax.com/middle/m2i8b1m2K9Z5m2K9_ant-clipart-childrens-ant-cute/
-[demo]: https://cotes2020.github.io/chirpy-demo/
-[wiki]: https://github.com/cotes2020/jekyll-theme-chirpy/wiki
-[contribute-guide]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/docs/CONTRIBUTING.md
-[contributors]: https://github.com/cotes2020/jekyll-theme-chirpy/graphs/contributors
-[lib]: https://github.com/cotes2020/chirpy-static-assets
-[vscode]: https://code.visualstudio.com/
-[jetbrains]: https://www.jetbrains.com/?from=jekyll-theme-chirpy
+| Type   | 설명               |
+| ------ | ------------------ |
+| Post   | 새로운 포스트 작성 |
+| Edit   | 기존 포스트 수정   |
+| Design | 블로그 디자인 변경 |
+| Feat   | 기능 추가          |
+| Fix    | 버그 수정          |
