@@ -71,9 +71,6 @@ function hello(name: string, age: number): void {
 
 ## ✅interface
 
-위에서 살펴 본 것 처럼 적으면 한 가지 문제점이 발생한다. 여러 컴포넌트에서 동일한 타입을 쓴 다면 이것을 계속 해당 파일마다 만들어야 된다면 너무 번거롭기 때문이다.
-이를 해결하기 위해 interface와 Type을 사용해 작성할 수 있다.
-
 interface는 주로 객체의 타입을 지정할 때 사용한다.
 
 ```typescript
@@ -91,12 +88,45 @@ const shin: User = {
 }
 ```
 
+### 💟interface extends
+
+interface는 extends 구문을 이용해 기존에 정의된 타입을 상속받고, 확장할 수 있다!
+
+```typescript
+interface Name {
+  name: string
+}
+
+interface User extends Name { 👈
+  age: number
+  isMarried: boolean
+}
+
+let shin: User = {
+  name: "짱구",
+  age: 5,
+  isMarried: false,
+}
+```
+
 ## ✅Type
 
 ```typescript
 let name: string = "짱구"
 let age: number = 5
 let isMarry: boolean = false
+```
+
+### 💟 ?(intersection)와 |(union) 사용하기
+
+`Type`키워드를 이용해 타입을 정의할 때 `extends`를 키워드를 사용할 순 없지만, ?와 |를 이용해 좀 더 유연하게 타입을 작성할 수 있게 해준다.
+
+`?`는 intersection(교차), 즉 두 개 이상의 타입을 결합하는 것을 말한다!
+
+`!`는 union(합집합)은 여러 타입 중 하나를 나타낸다.
+
+```
+
 ```
 
 ## ✅제네릭
@@ -119,6 +149,10 @@ let str: any =
 
 ## ✅d.ts
 
-d.ts 파일은
+d.ts 파일은 '선언 파일(Declaration file)' 이라고 한다. 최근에 등장하는 대부분의 라이브러리는 typescript를 사용할 수 있도록 Type을 제공하지만, 오래 된 라이브러리에서는 제공하지 않을 수 있다.🤔
+
+이를 해결하기 위해 위해, `d.ts` 파일을 이용해 라이브러리의 타입 정보를 지정해줄 수 있다.
 
 ## ✅react에서 활용
+
+-<https://www.typescriptlang.org/ko/docs/handbook/declaration-files/dts-from-js.html>
