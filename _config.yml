@@ -16,7 +16,7 @@ timezone: Asia/Seoul
 
 title: saemii blog # the main title
 
-tagline: 노션에서 이주 중입니다. # it will display as the sub-title
+tagline: 스스로 해결하는 궁금증 상자 # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   오늘은 무엇을 공부했나요?
@@ -73,10 +73,10 @@ theme_mode: # [light | dark]
 # will be added to all image (site avatar & posts' images) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn: "https://chirpy-img.netlify.app"
+img_cdn: ""
 
 # the avatar on sidebar, support local or CORS resources
-avatar: "/commons/avatar.jpg"
+avatar: "/assets/img/profile.png"
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
