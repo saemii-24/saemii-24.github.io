@@ -297,11 +297,12 @@ useMutation({
 #### 💟options
 
 mutation은 특정 순간에 아래 중 하나의 상태를 띄게 된다.
-| 상태 | 설명 |
-|-----------|--------------------------------------------|
-| isIdle or status === 'idle' | 뮤테이션이 현재 유휴 상태이거나 초기화된 상태 |
-| isPending or status === 'pending' | 뮤테이션이 현재 실행 중 |
-| isError or status === 'error' | 뮤테이션이 오류를 만났을 때 |
+
+| 상태                              | 의미                                            |
+| --------------------------------- | ----------------------------------------------- |
+| isIdle or status === 'idle'       | 뮤테이션이 현재 유휴 상태이거나 초기화된 상태   |
+| isPending or status === 'pending' | 뮤테이션이 현재 실행 중                         |
+| isError or status === 'error'     | 뮤테이션이 오류를 만났을 때                     |
 | isSuccess or status === 'success' | 뮤테이션이 성공적으로 완료되어 데이터 사용 가능 |
 
 ## ✅invalidateQueries
@@ -319,7 +320,7 @@ const toggleLike = useMutation(toggleLikeFunc, {
 
 ## 📩마무리
 
-아직 이 포스트만으로는 완전히 이해하지 못해서🥲 일단 사용해보면서 내용을 추가해야 할 것 같다..!
+아직 이 포스트만으로는 완전히 이해하지 못해서🥲 일단 사용해보면서 내용을 추가하고자 한다!
 
 ## 🗂️참고 사이트
 
