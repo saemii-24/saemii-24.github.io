@@ -1,7 +1,6 @@
 ---
 layout: compress
 ---
-
 <!doctype html>
 
 {% include origin-type.html %}
@@ -15,7 +14,9 @@ layout: compress
 <!-- `site.alt_lang` can specify a language different from the UI -->
 <html lang="{{ site.alt_lang | default: site.lang }}" {{ prefer_mode }}>
   {% include head.html %}
-
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js"></script>
+  </head>
   <body>
     {% include sidebar.html lang=lang %}
 
@@ -84,4 +85,18 @@ layout: compress
 
     {% include_cached search-loader.html %}
   </body>
+  {% if page.mermaid %}
+    <script>
+      var config = {
+        startOnLoad: true,
+        theme: 'forest',
+        flowchart: {
+          useMaxWidth: false,
+          htmlLabels: true,
+        },
+      }
+      mermaid.initialize(config)
+      window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'))
+    </script>
+  {% endif %}
 </html>
