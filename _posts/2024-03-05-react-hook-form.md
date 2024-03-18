@@ -1,5 +1,5 @@
 ---
-title: "React-Hook-Form을 알아보자"
+title: "React-Hook-Form(1) - 기본 사용방법 알아보기"
 author: saemii
 categories:
   - Library
