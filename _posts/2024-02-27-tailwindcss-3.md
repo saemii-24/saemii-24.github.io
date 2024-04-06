@@ -19,6 +19,7 @@ pin: true
 > - [TailwindCSS 세팅(1)](https://saemii-24.github.io/posts/tailwindcss-1/)
 > - [TailwindCSS 세팅(2)](https://saemii-24.github.io/posts/tailwindcss-2/)
 > - [TailwindCSS 세팅(3)](https://saemii-24.github.io/posts/tailwindcss-3/)
+> - [TailwindCSS 세팅(4)](https://saemii-24.github.io/posts/tailwindcss-4/)
 
 ## 🅰️ font
 

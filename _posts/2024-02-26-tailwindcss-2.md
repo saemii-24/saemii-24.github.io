@@ -19,6 +19,7 @@ TailwindCSS 세팅(1)편에서 plugin이나 그 외 세팅을 마무리 했으�
 > - [TailwindCSS 세팅(1)](https://saemii-24.github.io/posts/tailwindcss-1/)
 > - [TailwindCSS 세팅(2)](https://saemii-24.github.io/posts/tailwindcss-2/)
 > - [TailwindCSS 세팅(3)](https://saemii-24.github.io/posts/tailwindcss-3/)
+> - [TailwindCSS 세팅(4)](https://saemii-24.github.io/posts/tailwindcss-4/)
 
 ## ✅ 필요한 color 추가하기
 

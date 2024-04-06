@@ -19,6 +19,7 @@ Next.js에서 TailwindCSS 이용해 스타일링을 하기로 결정하고, 필�
 > - [TailwindCSS 세팅(1)](https://saemii-24.github.io/posts/tailwindcss-1/)
 > - [TailwindCSS 세팅(2)](https://saemii-24.github.io/posts/tailwindcss-2/)
 > - [TailwindCSS 세팅(3)](https://saemii-24.github.io/posts/tailwindcss-3/)
+> - [TailwindCSS 세팅(4)](https://saemii-24.github.io/posts/tailwindcss-4/)
 
 ## ✅ 특정 폴더 하위 파일에서 TailwindCSS 작동 안할 때
 
