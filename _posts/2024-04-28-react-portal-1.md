@@ -1,5 +1,5 @@
 ---
-title: "React Portal 사용하기(1)"
+title: "React Portal 사용하기"
 author: saemii
 categories:
   - React
