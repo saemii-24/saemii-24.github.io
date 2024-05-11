@@ -133,7 +133,7 @@ fill은 boolean 값을 사용한다! 부모 요소를 채우도록 이미지를 
 
 1. **비율 유지하고 letterbox형식으로 채우기**: `object-fit: "contain"` 추가 설정
 
-2. **이미지를 전체 컨테이너에 비율 유지하며 채우기** : `object-fit: "cover"` 추가 설정, 부모 요소에 `overflow: "hidden"` 스타일이 지정
+2. **이미지를 전체 컨테이너에 비율 유지하며 채우기** : `object-fit: "cover"` 추가 설정, 부모 요소에 `overflow: "hidden"` 스타일 지정
 
 ```javascript
 import Image from "next/image"
@@ -192,13 +192,14 @@ export default function Page() {
 ### ➡️Tailwind breakpoint
 
 sizes 작성에 참고하기 위해, 작업할 때 사용했던 break point를 정리하면 다음과 같다.
-| class | Media Query |
-|-------------|----------------------------------|
-| sm | @media (min-width: 640px) |
-| md | @media (min-width: 768px) |
-| lg | @media (min-width: 1024px) |
-| xl | @media (min-width: 1280px) |
-| 2xl | @media (min-width: 1536px) |
+
+| class | Media Query                |
+| ----- | -------------------------- |
+| sm    | @media (min-width: 640px)  |
+| md    | @media (min-width: 768px)  |
+| lg    | @media (min-width: 1024px) |
+| xl    | @media (min-width: 1280px) |
+| 2xl   | @media (min-width: 1536px) |
 
 ## ✅srcset
 
