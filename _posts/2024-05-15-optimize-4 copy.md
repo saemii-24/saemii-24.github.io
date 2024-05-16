@@ -79,7 +79,7 @@ images: {
 
 ## ✅ imageSizes와 deviceSizes
 
-이 문제를 해결하면서 내가 오해하고 있던 부분을 추가적으로 알게되었는데, 사실 나는 아래와 같이 imageSizes와 deviceSizes를 작성하면서 각 작성 된 값이 1:1로 대응하는 것이라고 생각했었다... 🥹
+이 문제를 해결하면서 내가 오해하고 있던 부분을 추가적으로 알게되었는데, 사실 나는 아래와 같이 imageSizes와 deviceSizes를 작성하면서 각 값이 1:1로 대응하는 것이라고 생각했었다... 🥹
 
 ```javascript
 //next.config.mjs
@@ -144,7 +144,7 @@ images: {
 
 이를 통해 반응형 작업을 할 때 1024px 이상일 때와 640px 이하일 때, 각 사이즈 별로 컴포넌트 사이즈도 달라질 때 가장 적절한 최적화 된 이미지를 보여줄 수 있다!
 
-## ✅ priority
+## ✅ priority={true}
 
 지금 프로젝트에서 Lighthouse 점수를 제일 많이 깎는건
 Largest Contentful Paint element에서 Load Delay 부분이다.
