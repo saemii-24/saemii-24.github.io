@@ -33,17 +33,16 @@ Hook은 리액트 16.8버전에 도입된 기능으로 함수형 컴포넌트에
 
 이렇게 코드를 추상화하면 어떤 장점이 있을까?
 
-**1. 코드의 재사용성 증가**
+- **코드의 재사용성 증가**
 
-- 추상화 된 코드는 독립적인 모듈로 분리되어 여러 곳에서 재사용 될 수 있다.
+  - 추상화 된 코드는 독립적인 모듈로 분리되어 여러 곳에서 재사용 될 수 있다.
 
-**2. 유지보수성 향상**
+- **유지보수성 향상**
 
-- 모듈화 된 코드의 경우 변경이 필요할 경우 특정 부분만 수정해서 전체에 적용할 수 있다.
+  - 모듈화 된 코드의 경우 변경이 필요할 경우 특정 부분만 수정해서 전체에 적용할 수 있다.
 
-**3. 복잡성 감소**
-
-- 시스템의 복잡한 부분을 감추고 중요한 내용에 집중할 수 있어 코드의 복잡성이 감소하고 가독성이 좋아진다.
+- **복잡성 감소**
+  - 시스템의 복잡한 부분을 감추고 중요한 내용에 집중할 수 있어 코드의 복잡성이 감소하고 가독성이 좋아진다.
 
 ## ✅Custom hook 만들기
 
@@ -273,6 +272,6 @@ export default useFirstMusicData
 
 ## 🗂️참고 사이트
 
-- https://qiita.com/as0088to/items/87cf9d0d61e1eb479251
-- https://ko.legacy.reactjs.org/docs/hooks-intro.html
-- https://ko.react.dev/learn/reusing-logic-with-custom-hooks
+- <https://qiita.com/as0088to/items/87cf9d0d61e1eb479251>
+- <https://ko.legacy.reactjs.org/docs/hooks-intro.html>
+- <https://ko.react.dev/learn/reusing-logic-with-custom-hooks>
