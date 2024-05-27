@@ -131,5 +131,5 @@ font-face는 위에서 알아본 것과 같이 400~900대의 폰트를 지정해
 
 ## 🗂️참고 사이트
 
-- https://ko.wikipedia.org/wiki/KS_X_1001
-- https://qiita.com/flatsato/items/2872aa863c20818982c8
+- <https://ko.wikipedia.org/wiki/KS_X_1001>
+- <https://qiita.com/flatsato/items/2872aa863c20818982c8>
