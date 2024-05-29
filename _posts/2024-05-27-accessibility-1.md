@@ -87,7 +87,7 @@ aria 속성은 여러가지가 있지만 주요 속성들만 정리해보았다.
 요소가 확장되었는지 축소되었는지 나타낸다. (아래 예제 참조)
 
 📌**aria-controls**<br/>
-현재 요소에 의해 제어되는 다른 요소(들)을 지정한다.
+현재 요소에 의해 제어되는 다른 요소를 지정한다.
 
 ```html
 <button aria-expanded="false" aria-controls="메뉴">메뉴</button>
@@ -117,6 +117,79 @@ aria-expanded 속성은 boolean 값을 가진다.
 ```
 
 `aria-hidden="true"`는 포커스를 받을 수 있는 요소에 사용하지 않고, 포커스 가능한 요소의 부모 또는 조상 요소에 추가하지 않는다!
+
+## ✅role 속성
+
+aria roles은 콘텐츠에 **의미**를 제공해 스크린 리더나 기타 도구가 해당 유형에 부합하는 방식으로 상호 작용을 표시하고, 지원할 수 있게 해준다!
+
+기본적으로 HTML의 시멘틱 태그는 각각의 역할이 있다. (`input type="radio"`등...) 하지만 `div`나 `span`같은 비시멘틱 요소는 역할이 없다. 이때 role 속성이 이러한 태그들에게 <u>의미를 제공</u>하여 보조 기술 사용자들이 해당 엘리먼트를 이해하는데 도움을 준다.
+
+role을 지정할 때는 element안에 `role="role type"`을 작성해주면 된다.
+
+주의할점은 모든 요소에 이런 role을 사용할 필요가 없다는 거다. 이미 HTML5에서는 많은 시멘틱 태그를 가지고 있기 때문에, 처음부터 시멘틱 마크업을 잘 하면 굳이 이런 role을 사용하지 않아도 충분히 의미를 전달 할 수 있다. (MDN 사이트에서도 시멘틱 태그를 활용할 것을 권장한다.)
+
+즉 아래에서는 시멘틱 태그로 대체하기 어려운 role을 위주로 정리한다.
+
+#### 💟문서 구조 역할
+
+📌**toolbar**<br/>
+드롭다운 메뉴와 같은 도구 모음으로, 3개 이상의 컨트롤을 그룹화하는 데만 사용한다!
+
+```html
+<div role="toolbar" aria-label="언어를 선택하는 툴바">
+  <button>한국어</button>
+  <button>English</button>
+  <button>日本語</button>
+</div>
+```
+
+📌**tooltip**<br/>
+툴팁은 요소가 포커스 or 호버 되는 경우 해당 요소에 대한 컨텍스트 정보를 제공하는 요소로, 레이블이 없는 콘텐츠에 접근할 경우, 도구 사용 팁을 제공하는 일종의 텍스트 풍선이다.
+
+```html
+<button aria-describedby="tooltip-btn">마우스를 올리세요</button>
+<div role="tooltip" id="tooltip-btn">추가 설명을 나타냅니다.</div>
+```
+
+📌**feed**<br/>
+feed는 동적으로 스크롤 가능한 문서 목록으로, 예를 들어 뉴스 피드, Facebook, Instagram과 같은 소셜 미디어 피드 또는 전자상거래 페이지의 관련된 제품 목록 등이 있다.
+
+문서 수를 알고 있는 경우 문서 자체에 `aria-setsize`를 설정하지만, 총 개수가 매우 많거나 무한이거나 자주 변경되는 경우에는 `aria-setsize="-1"`을 설정해 피드 크기를 알 수 없음을 표시하면 된다.
+
+```html
+<section role="feed" aria-busy="false">
+  <article aria-posinset="427" aria-setsize="-1">…</article>
+  <article aria-posinset="428" aria-setsize="-1">…</article>
+  <article aria-posinset="429" aria-setsize="-1">…</article>
+</section>
+```
+
+📌**math**<br/>
+콘텐츠가 수학적 표현을 나타내는 것을 알려준다. 만약 수학 식을 표현하는 이미지를 사용해야 한다면 role="math"와 함께 이 표현식을 음석으로 설명할 수 있는 레이블을 지정해주어야 한다.
+
+```html
+<div role="math" aria-label="a^{2} + b^{2} = c^{2}">
+  a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>
+</div>
+```
+
+📌**presentation/none**<br/>
+보조기술이 특정 웹 element를 무시하도록 하는 설정이다. 이 역할은 element가 레이아웃 목적으로만 사용되고, 접근성 기술에 의해 읽히지 않도록 할 때 사용된다.
+
+이때 이 role이 적용된 자식 요소도 접근성 트리에서 제거 되므로 중요한 콘텐츠가 포함 된 경우 사용에 유의한다.
+
+```html
+<span role="none">스크린 리더는 이 span 내용을 읽지 않는다.</span>
+```
+
+📌**note**<br/>
+주석이나 부가 설명등 중요한 추가 정보를 제공하는데 사용된다. 스크린 리더는 이 요소르 읽을 때 중요한 정보임을 사용자에게 알려준다.
+
+중요한 정보임을 알리는 만큼, 무분별하게 사용하지 않도록 한다.
+
+```html
+<p role="note" class="hilitebox">중요한 정보가 들어간다.</p>
+```
 
 ## ✅ul태그와 li태그 순서와 형식지키기
 
@@ -155,9 +228,12 @@ WCAG 2.1은 다음과 같은 기준을 제시한다.
 1. 텍스트와 배경 간의 최소 대비 비율은 **4.5:1**이어야 한다.
 2. 텍스트가 18pt 또는 Bold 14pt 이상일 경우 **3:1**의 명도 대비가 허용된다.
 
+## 🗂️참고 사이트
+
 - <https://dequeuniversity.com/rules/axe/4.9/color-contrast>
 - <https://accessibleweb.com/color-contrast-checker/>
 - <https://developer.mozilla.org/ko/docs/Web/Accessibility/ARIA/Attributes/aria-label>
 - <https://developer.mozilla.org/ko/docs/Web/Accessibility/ARIA>
 - <https://w3c.github.io/using-aria/#aria-states-and-properties-aria-attributes>
 - <https://accessibility.naver.com/acc/guide_04>
+- <https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles>
