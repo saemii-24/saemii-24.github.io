@@ -191,6 +191,26 @@ feed는 동적으로 스크롤 가능한 문서 목록으로, 예를 들어 뉴�
 <p role="note" class="hilitebox">중요한 정보가 들어간다.</p>
 ```
 
+#### 💟위젯 역할
+
+📌**scrollbar**<br/>
+📌**searchbox**<br/>
+📌**seperator**<br/>
+📌**slider**<br/>
+📌**spinbutton**<br/>
+📌**switch**<br/>
+📌**tab**<br/>
+📌**tabpanel**<br/>
+📌**treeitem**<br/>
+📌**combobox**<br/>
+📌**menu**<br/>
+📌**menubar**<br/>
+📌**tablist**<br/>
+📌**tree**<br/>
+📌**treegrid**<br/>
+
+#### 💟위젯 역할
+
 ## ✅ul태그와 li태그 순서와 형식지키기
 
 > - Lists do not contain only `<li>` elements and script supporting elements (`<script>` and `<template>`).
