@@ -191,7 +191,7 @@ feed는 동적으로 스크롤 가능한 문서 목록으로, 예를 들어 뉴�
 <p role="note" class="hilitebox">중요한 정보가 들어간다.</p>
 ```
 
-#### 💟위젯 역할
+<!-- #### 💟위젯 역할
 
 📌**scrollbar**<br/>
 📌**searchbox**<br/>
@@ -207,7 +207,7 @@ feed는 동적으로 스크롤 가능한 문서 목록으로, 예를 들어 뉴�
 📌**menubar**<br/>
 📌**tablist**<br/>
 📌**tree**<br/>
-📌**treegrid**<br/>
+📌**treegrid**<br/> -->
 
 #### 💟위젯 역할
 
