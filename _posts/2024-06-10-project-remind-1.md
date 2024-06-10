@@ -7,6 +7,7 @@ tags:
   - [JavaScript, Project, React]
 date: 2024-06-10
 last_modified_at: 2024-06-10
+pin: false
 ---
 
 ## 📌들어가며
@@ -90,7 +91,7 @@ cardData는 아래와 같은 객체를 담은 배열이다.
 
 즉 사용자가, KB국민은행, 우리은행 버튼을 클릭한경우 ['KB국민은행', '우리은행']과 같은 배열이 만들어져, companyMapArr에 할당된다.
 
-비슷하게, 사용자가 선택한 혜택 버튼에 따라 ['커피', '모바일']등의 혜택 배열이 만들어지고, benefitMapArr에 할당된다.
+비슷하게, 사용자가 선택한 혜택 버튼에 따라 ['커피', '모바일']등의 배열이 만들어지고, benefitMapArr에 할당된다.
 
 ```javascript
 let companyMapArr = company
@@ -103,8 +104,6 @@ let benefitMapArr = benefit
 
 이제 위에서 만든 사용자가 선택한 배열을 사용해 카드를 필터링 한다.
 
-먼저 companyMapArr로 만든 사용자가 선택 한 카드사 이름이 담긴 배열에 해당
-
 ```javascript
 const filterObj = thisData.filter((card) => {
   const companyCondition = companyMapArr.includes(card.bank)
@@ -114,3 +113,50 @@ const filterObj = thisData.filter((card) => {
   return companyCondition && benefitCondition
 })
 ```
+
+먼저 첫 번째 조건인 card.bank (카드 객체의 은행 이름)가 companyMapArr로 만든 사용자가 선택 한 카드사 이름이 담긴 배열에 있는지 확인한다.
+
+두 번째 조건은 사용자가 선택한 혜택을 모두 포함해야 한다.
+
+1. `benefitMapArr.every((condition) => ...)`
+
+benefitMapArr의 모든 요소(사용자가 선택한 모든 혜택)에 대해 다음 식이 전부 true를 반환하는지 확인한다.
+
+2. `card.benefit.some((benefit) => ...)`
+   card.benefit 배열의 어떤 요소(benefit)라도 주어진 함수가 true를 반환하는지 확인한다.
+
+3. `Object.keys(benefit)[0] === condition`
+   benefit 객체의 첫 번째 키가 현재의 condition과 일치하는지 확인한다.
+
+최종적으로 `companyCondition`과 `benefitCondition`이 모두 true인 경우에 대해서만 데이터가 필터링 된다!
+
+이렇게 말하니까...복잡한데!
+먼저 1번의 condition은 사용자가 선택한 혜택의 배열에서 하나씩 검사를 시도한다.
+
+즉, 사용자가 포함하길 원하는 혜택이 ['편의점', '구독']이었다면, `편의점`을 꺼내 검사를 시도하는 것이다.
+
+그다음 2번의, benefit은 위에서 살펴본 객체에 담긴 혜택들을 하나씩 검사한다.
+
+즉 아래와 같은 데이터를 하나씩 꺼내 검사하게 된다.
+
+```
+{ 문화: '인터파크 티켓 10% 할인 (월 할인한도 : 7천원)' }
+```
+
+3번의 `Object.keys(benefit)[0]`은 위의 데이터에서 key값인 '문화'를 꺼내고, 이 '문화'를 1번의 condition '편의점'과 동일한지 확인한다.
+
+여기까지가 전체 필터링의 흐름이다.
+
+이제 some과 every의 특징을 살펴보자. some은 하나라도 true면 true를 every는 전부 true여야 true가 도출된다.
+
+즉, 2번과 3번을 통해 해당 카드 데이터의 혜택에 `편의점`, `구독`이 있는지 확인하며, 편의점이 있으면 true, 구독이 없는 경우 false를 return한다.
+
+1번에서는 모든 값이 true인 경우만 true이므로, 이 예제에서는 현재 편의점만 true이기 때문에 false를 return 한다. 즉, 사용자가 선택한 혜택 중 편의점만 만족하므로 이 카드는 필터링이 불가능함을 알 수 있다!
+
+## 🎁마무리
+
+구현한 내용을 살펴보니 작성해둔 주석이 코드 흐름을 이해하는데 도움을 주었다! (과거의 나에게 고마워지는...😊)
+
+every와 some 그리고 filter를 섞어 사용했고, 코드를 작성한지 시간이 다소 지났던 지라 이 부분에 대해 질문이 들어왔을 때 구현 방식을 제대로 설명을 못했었는데, 이제 그 때보다 좀 더 잘 설명할 수 있을 것 같다.
+
+오늘의 리마인드 끝!
