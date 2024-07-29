@@ -14,18 +14,55 @@ pin: true
 
 ## ✅tailwind-merge
 
+tailwind-merge는 스타일 충돌 없이 tailwind css의 클래스를 병합해주는 역할을 한다.
+쉽게 말해서, 기본 스타일이 bg-red-500일때, bg-green-500을 props로 내려줘서 덮어씌울 수 있다고 생각하면 된다.
+
+설치하고 시작해보자.
+
+```bash
+npm i tailwind-merge
+```
+
+현재 page.tsx에서 `Button`컴포넌트를 불러와 사용하고자 한다.
+`Button` 컴포넌트의 기본 색상은 bg-red-500이지만,
+bg-green-500으로 변경하고 싶을때, 이 내용을 단순히 props로 내려줘서 덮어씌우고자 시도하면
+tailwind가 적절히 적용되지 않는 것을 알 수 있다.
+
 ```typescript
-const Button = ({ children, ...props }) => {
+import Button from "@/components/Button"
+import React from "react"
+
+const page = () => {
   return (
-    <Button
-      className={twMerge("rounded-md border py-3 px-6 bg-red-500")}
+    <>
+      <Button className="bg-green-900 hover:bg-red-900">Save</Button>
+    </>
+  )
+}
+
+export default page
+```
+
+이제 Button 컴포넌트에 twMerge를 사용해서 스타일 충돌없이 적용해보자.
+`twMerge(default 속성, className의 props)` 와 같이 적어준다.
+
+```typescript
+const Button = ({ children, className, ...props }) => {
+  return (
+    <button
+      className={twMerge(
+        "mx-3 bg-blue-900 px-4 py-2 text-white hover:bg-blue-100 hover:text-blue-900",
+        className
+      )}
       {...props}
     >
       {children}
-    </Button>
+    </button>
   )
 }
 ```
+
+- 여기서 props는
 
 ## ✅cva
 
