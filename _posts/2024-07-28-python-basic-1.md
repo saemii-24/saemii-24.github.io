@@ -141,5 +141,7 @@ print(f"{cat.name}는 {cat.age}살이에요")  # 출력: 쿠키는 7살이에요
 
 위와 같이, `super()`는 현재 클래스의 부모 클래스를 참조하고, 해당 부모 클래스의 메서드나 속성에 접근할 수 있는 방법을 제공하는 키워드다.
 
+`super().__init__(name)` 로 Animal의 name을
+
 - <https://docs.python.org/ko/3/tutorial/classes.html>
 - <https://www.tutorialsteacher.com/python/python-class>
