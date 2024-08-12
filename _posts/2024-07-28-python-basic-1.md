@@ -1,5 +1,5 @@
 ---
-title: "파이썬 기본 문법 - 클래스 상속과 데코레이터"
+title: "파이썬 기본 문법 - 클래스 상속"
 author: saemii
 categories:
   - JavaScript
@@ -139,9 +139,10 @@ print(f"{cat.name}는 {cat.age}살이에요")  # 출력: 쿠키는 7살이에요
 
 ```
 
-위와 같이, `super()`는 현재 클래스의 부모 클래스를 참조하고, 해당 부모 클래스의 메서드나 속성에 접근할 수 있는 방법을 제공하는 키워드다.
+위와 같이, `super()`는 현재 클래스의 부모 클래스를 참조하고, 해당 부모 클래스의 메서드나 속성에 접근할 수 있는 방법을 제공하는 키워드로,
+이를 통해 코드의 재사용성과 확장성을 높일 수 있다.
 
-`super().__init__(name)` 로 Animal의 name을
+## 🗂️참고 사이트
 
 - <https://docs.python.org/ko/3/tutorial/classes.html>
 - <https://www.tutorialsteacher.com/python/python-class>
