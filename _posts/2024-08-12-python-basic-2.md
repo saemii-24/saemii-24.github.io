@@ -26,8 +26,84 @@ pin: true
 lambda arguments: expression
 ```
 
-## ✅예제
+### ➡️사칙연산
+
+간단하게 숫자를 더해보자.
+위에 작성된 것 처럼, lambda(키워드) 를 먼저 작성한 뒤, 함수에 전달 될 인자 `x, y`를 작성하고, `x + y` 를 작성해준다.
+
+```python
+add = lambda x, y: x + y
+print(add(1, 2))  # 출력: 3
+```
+
+이를 응용해 다음과 같은 결과값을 얻을 수 있다.
+
+```python
+result = lambda x, y: x * y + 3
+print(result(1, 2))  # 출력: 5
+```
+
+## ✅list comprehension
+
+리스트 컴프리헨션은 새로운 리스트를 간단히 만들 수 있는 방법이다.
+구문은 다음과 같다.
+
+```python
+newlist = [expression for item in iterable if condition == True]
+```
+
+좀 복잡한데 이걸 풀어서 한국어로 써보자면,
+
+- newlist = 새로운 리스트
+- expression = 리스트의 각 항목에 적용할 표현식
+- item = iterable의 각 항목
+- iterable = iterable 객체 (반복할 원본 리스트 등)
+- condition = 조건 (조건이 True일 떄 실행된다.)
+
+### ➡️예제
+
+```python
+numbers = [1, 3, 5, 7, 9]
+
+# 리스트 컴프리헨션을 사용해 각 요소에 2를 곱해 새로운 리스트를 생성한다.
+double = [x * 2 for x in numbers]
+
+print(double)  # 출력: [2, 6, 10, 14, 18]
+```
+
+하나씩 끊어서 이해해보면 `double`이라는 새로운 리스트를 만드는데,
+각각의 항목에 `x * 2` 2를 곱할 것이며, x는 numbers(기존 리스트) 각각의 항목에 해당함을 알 수 있다.
+
+현재는 모든 항목에 2를 곱하기 때문에 조건이 생략되었지만 아래와 같이 조건을 추가할수도 있다.
+
+```python
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# 홀수인 요소를 선택해 각 요소에 2로 곱한 새로운 리스트를 생성한다.
+oddDouble = [x * 2 for x in numbers if x % 2 != 0]
+
+print(oddDouble)  # 출력: [2, 6, 10, 14, 18]
+```
+
+여기서는 **홀수** 라는 `x % 2 != 0` 조건이 추가되었다.
+
+### ➡️list comprehensio과 lambda
+
+리스트 컴프리헨션과 람다 함수를 함께 사용하면 리스트에서 원하는 요소를 간단하게 변경할 수 있다.
+
+```python
+numbers = range(11)  # 0부터 10까지의 숫자를 생성하는 이터러블 객체
+
+# 조건에 따라 각 요소를 다르게 변형하여 새로운 리스트 생성
+changeNumbers = [
+    (lambda x: x + 10 if x % 3 == 0 else (x - 20 if x % 5 == 0 else x))(x)
+    for x in numbers
+]
+
+print(changeNumbers)  # 출력: [0, 1, 2, 13, 4, -15, 6, 7, 8, -11, 10]
+```
 
 ## 🗂️참고 사이트
 
 - <https://www.w3schools.com/python/python_lambda.asp>
+- <https://www.w3schools.com/python/python_lists_comprehension.asp>
