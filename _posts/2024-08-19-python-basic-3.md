@@ -37,7 +37,7 @@ file = open('file_path', 'mode')
 | `'t'` | **Text** - 기본값. 파일을 텍스트 모드로 처리한다.                                                    |
 | `'b'` | **Binary** - 파일을 바이너리 모드로 처리한다. (예: 이미지 파일)                                      |
 
-### ➡️전체 파일 읽기
+## ✅전체 파일 읽기
 
 위의 예제에서는 단순히 파일을 열었을 뿐 그 안의 내용에 접근하고 있지 않았다. 파일을 읽기 위해서는 `read()` 메서드를 사용한다.
 
@@ -53,7 +53,7 @@ print(content)
 여기서 `with`은 자원을 열 때 자원을 사용한 후 자동으로 닫아주기 위해 사용되었다.
 `with` 블록이 끝나면 파일 핸들이 자동으로 닫히고 자원이 해제되므로, `file.close()`를 명시적으로 호출할 필요가 없다.
 
-### ➡️파일 한 줄씩 읽기
+## ✅파일 한 줄씩 읽기
 
 파일을 한 줄씩 읽을 땐 `readline()` 이나 `readlines()` 메서드를 사용한다.
 
@@ -77,7 +77,38 @@ for line in lines:
     print(line.strip())
 ```
 
+## ✅문자열 파일에 기록하기
+
+`write()` 함수를 이용해 문자열을 파일에 기록한다. 이때 문자열 끝해 개행 문자가 추가되진 않는다.
+
+```python
+with open('example.txt', 'w') as file:
+    file.write("Hello, world!\n")
+```
+
+먼저 example.txt를 w(쓰기모드)로 연다. 이때 해당 파일이 존재하지 않으면 새로 생성한다.
+해당 파일에 `Hello, world!`를 쓰고 개행함을 나타낸다.
+
+## ✅문자열 파일에 기록하기
+
+`writelines()` 함수는를 이용해 여러 문자열을 파일에 기록한다. **'여러 문자열'** 은 리스트 형태로 들어오는 문자열들을 말한다.
+
+```python
+# 문자열의 리스트를 파일에 기록하기
+lines = [
+    "Hello, world!\n",
+    "Hello, earth!\n",
+    "Hello, everyone!\n",
+]
+
+with open('example.txt', 'a') as file:
+    file.writelines(lines)
+```
+
+writelines()를 통해 문자열 리스트를 받고 각 문자열을 파일에 작성한다. 위의 예제에서는 a 모드로 해당 파일을 열었기 때문에 기존 파일 끝에 데이터를 추가하며, 리스트 각 문자열에 줄 바꿈을 추가한다.
+
 ## 🗂️참고 사이트
 
 - <https://www.w3schools.com/python/python_file_handling.asp>
 - <https://www.w3schools.com/python/ref_file_readline.asp>
+- <https://www.w3schools.com/python/python_file_write.asp>
