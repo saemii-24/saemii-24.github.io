@@ -158,6 +158,12 @@ divide가 각 요소들을 구별하기 위해 선을 넣는 것이라면, space
 
 ## ✅before & after
 
+before와 after는 **가상 요소(pseudo-elements)** 로, 해당 요소가 실제 HTML에 존재하지 않지만, CSS로 스타일을 지정할 수 있는 요소다.
+
+```javascript
+<div class="hover:bg-black/30 before:hover:text-blue-400">호버 해보세요</div>
+```
+
 ## ✅truncate
 
 작업중 넘치는 텍스트를 ... 표시하기 위해 기존에 사용했던 방식대로 white-space text overflow 등을 사용하려고, tailwind 클래스를 찾아보려고 했는데, tailwind에서는 ` `라는 class 이름으로 훨씬 간단하게 관련된 css를 제공하고 있었다.
@@ -187,7 +193,32 @@ aspect-ratio는 [CSS 속성](https://developer.mozilla.org/en-US/docs/Web/CSS/as
 원하는 값은 다른 tailwind 작성법과 동일하게 `aspect-[4/3]`과 같은 방식으로 적어준다.
 이때 4는 가로, 3은 세로값이 된다.
 
-## ✅ring
+## ✅outline & ring
+
+tailwind에서는 border 바깥쪽에 선을 그릴 수 있는 방식으로 outline과 ling을 제시한다.
+outline이란 건 기본적으로 CSS에 있는 속성으로, 요소의 외곽선을 의미하고, 포커스 가능 요소에서 포커스를 나타내는 데 자주 사용된다.
+
+그렇다면 ring은 무엇일까? 먼저 ring은 box-shadow로 생성하는 요소의 외곽선이다! outline 처럼 요소가 포커스 상태일 때 강조를 위해 사용되며, box-shadow로 구현되기 때문에 border와 outline과는 독립적으로 작동한다.
+
+### ➡️outline vs ring
+
+ring과 outline의 가장 큰 차이점은 위에서 살펴본 것 처럼, 어떤 CSS 속성을 사용했냐는 것으로, ring은 box-shadow를 사용하는 만큼, 색상, opacity, blur, offset 등 좀더 유연하고 다양한 커스텀이 가능하다. 하지만 outline은 두께, 색상 조정등 ring과 비교해 단순한 CSS 조작만 가능하다.
+
+| class                  | 설명                                  |
+| ---------------------- | ------------------------------------- |
+| outline                | 외곽선 추가                           |
+| outline-{size}         | 두께 조절                             |
+| outline-{color}        | 색상 지정                             |
+| outline-offset-{value} | 요소와 외곽선(outline) 사이 간격 지정 |
+
+| class                | 설명                               |
+| -------------------- | ---------------------------------- |
+| ring                 | 외곽선 추가                        |
+| ring-{size}          | 두께 조절                          |
+| ring-{color}         | 색상 지정                          |
+| ring-opacity-{value} | 투명도 지정                        |
+| ring-offset-{value}  | 요소와 외곽선(ring) 사이 간격 지정 |
+| ring-offset-{color}  | 요소와 외곽선(ring) 사이 색상 지정 |
 
 ## ✅peer
 
@@ -227,6 +258,12 @@ state를 이용해 조건으로 관리할 수 있겠지만 peer 클래스를 사
 | peer-disabled | peer 요소가 비활성화되었을 때            |
 
 ## ✅group
+
+group은 위에서 살펴본 peer와 사용방식은 거의 비슷하지만, 형제 요소가 아니라 부모-자식 요소끼리의 그룹이라는 것에 차이가 있다.
+사용방식은 아래와 같다.
+
+1. 부모 요소에 group 클래스를 추가.
+2. 자식 요소에서 `group-hover`, `group-focus` 등 부모의 특정 상태값을 이용해 스타일 변경
 
 ## ✅sr-only
 
