@@ -157,51 +157,11 @@ divide가 각 요소들을 구별하기 위해 선을 넣는 것이라면, space
 
 ## ✅before & after
 
-before와 after는 CSS의 가상 요소(pseudo-elements) 로, 실제 DOM에는 존재하지 않지만 CSS를 통해 스타일을 지정할 수 있는 요소다. Tailwind CSS에서도 이를 활용할 수 있다.
+before와 after는 **가상 요소(pseudo-elements)** 로, 해당 요소가 실제 HTML에 존재하지 않지만, CSS로 스타일을 지정할 수 있는 요소다.
 
-Tailwind는 기본적으로 before와 after를 지원하지 않으므로, 사용하려면 아래처럼 content 속성을 추가해 활성화해야 한다.
-
-javascript
-코드 복사
-
-<div class="relative before:content-['🔥'] before:absolute before:top-0 before:left-0">
-  이 문장을 주목하세요
-</div>
-🔍 Tailwind에서 before/after 설정하는 방법
-Tailwind에서 before와 after를 사용하려면 클래스 이름 앞에 before: 또는 after:를 붙이면 된다. 이를 통해 Tailwind의 유틸리티 클래스들을 가상 요소에 직접 적용할 수 있다.
-
-1️⃣ content 설정하기
-CSS의 content는 가상 요소를 활성화하기 위해 반드시 설정해야 하는 속성이다. Tailwind에서는 이를 before:content-['텍스트'] 또는 before:content-none과 같은 방식으로 지정할 수 있다.
-
-javascript
-코드 복사
-
-<div class="before:content-['✅'] before:text-green-500">
-  성공 메시지
-</div>
-2️⃣ 스타일 지정하기
-다른 Tailwind 클래스처럼 가상 요소에도 색상, 크기, 위치 등을 자유롭게 설정할 수 있다.
-
-javascript
-코드 복사
-
-<div class="relative before:content-['✨'] before:text-yellow-500 before:mr-2 before:text-xl">
-  반짝이는 텍스트
-</div>
-3️⃣ 호버 상태와 결합하기
-가상 요소는 상태 클래스와도 결합 가능하다. 예를 들어, hover, focus 같은 상태에 따라 가상 요소의 스타일을 변경할 수 있다.
-
-javascript
-코드 복사
-
-<div class="relative before:content-['🚀'] before:opacity-0 hover:before:opacity-100 hover:before:translate-x-2 transition-all">
-  가상 요소를 확인하세요!
-</div>
-✨ Tailwind에서 before와 after를 사용할 때의 팁
-가상 요소를 활성화하려면 반드시 content 속성을 설정해야 한다.
-relative, absolute 같은 속성을 활용해 위치를 세밀히 조정할 수 있다.
-상태 클래스(hover, focus 등)와 조합하면 더 다양한 UI 효과를 만들 수 있다.
-이렇게 before와 after를 활용하면 CSS의 강력한 기능과 Tailwind의 편리함을 결합해 창의적인 UI를 구현할 수 있다. 🎨
+```javascript
+<div class="hover:bg-black/30 before:hover:text-blue-400">호버 해보세요</div>
+```
 
 ## ✅truncate
 
@@ -313,3 +273,11 @@ group은 위에서 살펴본 peer와 사용방식은 거의 비슷하지만, 형
 이를 통해 웹 접근성을 높여 더 나은 사용자 경험을 제공할 수 있다.
 
 만약 다시 보여져야 한다면 `not-sr-only`를 사용하면 된다.
+
+## ✅pointer-events-none
+
+만약 마우스 이벤트를 막고 싶다면 `pointer-events-none` class를 사용하면 된다. `pointer-events-none`은 CSS의 `pointer-events: none;` 속성과 동일하며, 해당 요소가 모든 마우스 이벤트(클릭, 마우스 오버, 드래그) 동작을 비활성화 시킨다.
+
+다만 주의할 점으로는, 해당 class를 작성하더라도 **키보드** 로는 해당 element에 접근해 상태를 변경할 수 있다는것이다!
+
+즉, checkbox나 다른 disable 되는 조건들에 사용하는 것을 지양하고, 마우스 포인터 작동이 필요 없는 경우에만 사용하는게 적절하다.
