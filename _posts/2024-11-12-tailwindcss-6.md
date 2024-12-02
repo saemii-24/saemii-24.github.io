@@ -282,7 +282,7 @@ group은 위에서 살펴본 peer와 사용방식은 거의 비슷하지만, 형
 
 즉, checkbox나 다른 disable 되는 조건들에 사용하는 것을 지양하고, 마우스 포인터 작동이 필요 없는 경우에만 사용하는게 적절하다.
 
-### ☑️tabindex
+### ➡️tabindex
 
 위에서 '마우스 이벤트'를 막는 class에 대해 알아봤는데, 그럼 '키보드 접근'은 어떻게 막을 수 있을지 궁금해서 찾아보았다!
 물론 form 요소라면 `disabled`같은 방법을 사용하면 되는데, 그 외의 상황에서는 어떻게 하면 좋을까?
@@ -302,7 +302,17 @@ tabindex = '1';
 | 0       | 기본 키보드 포커스 흐름을 따른다.                                      |
 | 양수    | 포커스 순서를 직접 지정한다. 작을 수록 우선순위가 높다.                |
 
+## ✅!important
+
+만약 !important를 써야 하는 상황에는 어떻게 할까?
+tailwind에서는 `!` 로 간단하게 표시하면 된다.
+
+```
+!bg-red-500
+```
+
 ## 🗂️참고 사이트
 
 - <https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex>
+- <https://stackoverflow.com/questions/68527235/add-both-important-selector-strategy-for-tailwind-configuration>
 - <https://tailwindcss.com/docs/installation>
