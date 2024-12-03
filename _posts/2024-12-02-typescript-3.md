@@ -97,6 +97,28 @@ Polymorphic Components를 만들 때는, typescript를 적극 활용해 보다 �
 
 사용자가 잘못해서 'divv' 를 내려주거나, button 태그인데 href를 내려주려고 시도하는 것을 막아주기 때문이다.
 
+그럼 먼저 위에서 부터 차례대로 해석해보자.
+
+```typescript
+type PolymorphicProps<C extends React.ElementType> = {
+  as?: C
+  children: React.ReactNode
+} & React.ComponentPropsWithoutRef<C>
+```
+
+먼저 `type PolymorphicProps`은 PolymorphicProps란 이름의 type을 지정해준다는 뜻이다.
+이때 `<C extends React.ElementType>` 은 C라는 사용할 때 결정되는 어떠한 타입(제네릭)을 `React.ElementType`으로 extends(한정한다) 라는 의미이다.
+
+사실 extends의 뜻이 '확장하다' 라는 의미가 있어, 나는 저 부분을 <u>C라는 어떠한 타입에 '더해서' React.ElementType도 가질 수 있다</u> 라고 **오해** 했었다.
+하지만 이 extends의 의미를 직역하려 하지 말고, '한정한다/제약한다' 라는 말로 해석해보면 훨씬 자연스럽게 이 내용을 이해할 수 있다!
+
+계속해보면, 이제 extends를 이용해 타입이 한정된 C는 React.ElementType인
+
+1. HTML 태그 이름 ('div', 'span', 'a' 등)
+2. React 컴포넌트 타입 (MyComponent, MySpan 등)
+
+의 타입을 가질 수 있게 된다.
+
 ## 🗂️참고 사이트
 
 - <https://www.freecodecamp.org/news/build-strongly-typed-polymorphic-components-with-react-and-typescript/>
