@@ -110,7 +110,8 @@ type PolymorphicProps<C extends React.ElementType> = {
 이때 `<C extends React.ElementType>` 은 C라는 사용할 때 결정되는 어떠한 타입(제네릭)을 `React.ElementType`으로 extends(한정한다) 라는 의미이다.
 
 사실 extends의 뜻이 '확장하다' 라는 의미가 있어, 나는 저 부분을 <u>C라는 어떠한 타입에 '더해서' React.ElementType도 가질 수 있다</u> 라고 **오해** 했었다.
-하지만 이 extends의 의미를 직역하려 하지 말고, '한정한다/제약한다' 라는 말로 해석해보면 훨씬 자연스럽게 이 내용을 이해할 수 있다!
+
+하지만 이 extends의 의미를 직역하려 하지 말고, **'한정한다/제약한다'** 라는 말로 해석해보면 훨씬 자연스럽게 이 내용을 이해할 수 있다!
 
 계속해보면, 이제 extends를 이용해 타입이 한정된 C는 React.ElementType인
 
