@@ -120,6 +120,21 @@ type PolymorphicProps<C extends React.ElementType> = {
 
 의 타입을 가질 수 있게 된다.
 
+```typescript
+({ as, children, ...props }: PolymorphicProps<C>) 
+```
+이제 이 부분을 해석해보자. <u>여기서 props의 타입을 제한하는 역할</u>을 한다.
+
+먼저 `({})`로 props를 받고 있는데, 타입을 PolymorphicProps<C>로 C에 따라 props의 타입을 동적으로 결정하고 있다.
+
+C = "button" → 버튼 속성(onClick, type 등)
+C = "a" → 링크 속성(href, target 등)
+
+이를 이용해 더 안전한 Polymorphic Component를 만들 수 있게 된다.
+
+
+
+
 ## 🗂️참고 사이트
 
 - <https://www.freecodecamp.org/news/build-strongly-typed-polymorphic-components-with-react-and-typescript/>
