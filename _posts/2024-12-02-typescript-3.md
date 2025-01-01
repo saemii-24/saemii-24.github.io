@@ -17,7 +17,7 @@ pin: true
 어쩌다 들어간 웹사이트에서 Polymorphic Components 관련된 글을 보게 되었다.
 Polymorphic(다형성) 이란 단어 자체가 낯설어서, 이게 뭐지? 하고 읽어보던 와중에, 내가 예전에 봤던 인강 선생님이 사용하시던 방식인걸 깨달았다. 심지어 지금 내가 필요로 했던 내용이란것도!
 
-역시 사람은 망각의 동물(...) 🥹이라고 그때도 <i>와~ 좋은 방법이구나!</i> 하고 노션에 정리해두었는데 그 이후로 사용하질 않아서 까맣게 잊어버리고 말았다.. 🙃
+역시 사람은 망각의 동물(...) 이라고 그때도 <i>와~ 좋은 방법이구나!</i> 하고 노션에 정리해두었는데 그 이후로 사용하질 않아서 까맣게 잊어버리고 말았다.. 🙃
 
 지금 업무에 적용하기도 좋은 내용이라, 내용을 꼼꼼히 읽어보았는데, 전체적인 내용 자체는 어렵지 않지만 의외의 복병은 Typescript를 해석하는 것이었다.
 
@@ -95,7 +95,7 @@ const Components = <C extends React.ElementType = "div">({
 
 Polymorphic Components를 만들 때는, typescript를 적극 활용해 보다 안전한 컴포넌트를 만들 수 있다.
 
-사용자가 잘못해서 'divv' 를 내려주거나, button 태그인데 href를 내려주려고 시도하는 것을 막아주기 때문이다.
+개발자가 실수로 `div`가 아닌 `divv` 를 내려주거나, `button` 태그인데 `href`를 내려주려고 시도하는 것을 막아주기 때문이다.
 
 그럼 먼저 위에서 부터 차례대로 해석해보자.
 
@@ -106,34 +106,40 @@ type PolymorphicProps<C extends React.ElementType> = {
 } & React.ComponentPropsWithoutRef<C>
 ```
 
-먼저 `type PolymorphicProps`은 PolymorphicProps란 이름의 type을 지정해준다는 뜻이다.
-이때 `<C extends React.ElementType>` 은 C라는 사용할 때 결정되는 어떠한 타입(제네릭)을 `React.ElementType`으로 extends(한정한다) 라는 의미이다.
+1. `type PolymorphicProps`
 
-사실 extends의 뜻이 '확장하다' 라는 의미가 있어, 나는 저 부분을 <u>C라는 어떠한 타입에 '더해서' React.ElementType도 가질 수 있다</u> 라고 **오해** 했었다.
+   - PolymorphicProps란 이름의 type을 지정해준다는 뜻이다.
 
-하지만 이 extends의 의미를 직역하려 하지 말고, **'한정한다/제약한다'** 라는 말로 해석해보면 훨씬 자연스럽게 이 내용을 이해할 수 있다!
+2. `<C extends React.ElementType>`
 
-계속해보면, 이제 extends를 이용해 타입이 한정된 C는 React.ElementType인
+   - 제네릭 타입 C가 React.ElementType으로 **제한** 된다는 의미다.
+   - :star: 제네릭 타입은 **"사용할 때 결정"** 된다. 즉, `React.ElementType` 중 사용자가 지정한 C 타입에 따라 PolymorphicProps의 타입이 결정된다.
+     - 이때의 C는 다음과 같이 HTML 태그 이름 ('div', 'span', 'a' 등)이 된다. 여기서 주의할 점은 이 코드까지는 C의 범위를 정의한 것이며, `PolymorphicProps<C>`가 어떤 속성(`href` ,`type` 등)을 허용하는지는 제한되어 있지 않다.
 
-1. HTML 태그 이름 ('div', 'span', 'a' 등)
-2. React 컴포넌트 타입 (MyComponent, MySpan 등)
+3. `= { ... } & React.ComponentPropsWithoutRef<C>`
+   - 2번을 통해 C(tag)를 지정했다면, 해당 tag에 따라 내려줄 수 있는 props가 달라질 것임을 예상할 수 있다. (a일때만 href를 내려준다 등)
+   - 이 부분을 통해 구체적으로 어떤 props를 사용할 수 있을지를 정의한다.
+   - `{ ... }` 와 `React.ComponentPropsWithoutRef<C>` 는 교차타입 (A & B)로서, A와 B의 속성을 모두 가지는 타입이다.
 
-의 타입을 가질 수 있게 된다.
+그다음에는 실제 컴포넌트를 만들 때 사용된 타입스크립트를 해석해보자.
 
 ```typescript
-({ as, children, ...props }: PolymorphicProps<C>) 
+const Components = <C extends React.ElementType = "div">({
+  as,
+  children,
+  ...props
+}: PolymorphicProps<C>) => {
+  const Component = as || "div"
+  return <Component {...props}>{children}</Component>
+}
 ```
-이제 이 부분을 해석해보자. <u>여기서 props의 타입을 제한하는 역할</u>을 한다.
 
-먼저 `({})`로 props를 받고 있는데, 타입을 PolymorphicProps<C>로 C에 따라 props의 타입을 동적으로 결정하고 있다.
+1. `Components = <C extends React.ElementType = "div">`
+   - 컴포넌트를 호출할 때 C의 타입을 결정하겠다는 의미
+2. `:PolymorphicProps<C>`
+   - 위에서 정의한 `PolymorphicProps`타입을 해당 컴포넌트의 props 타입으로 지정한다. 즉, C에 맞는 속성들을 포함하는 타입이 된다.
 
-C = "button" → 버튼 속성(onClick, type 등)
-C = "a" → 링크 속성(href, target 등)
-
-이를 이용해 더 안전한 Polymorphic Component를 만들 수 있게 된다.
-
-
-
+이러한 과정을 통해 안전한 Polymorphic 컴포넌트가 만들어 진다.
 
 ## 🗂️참고 사이트
 
