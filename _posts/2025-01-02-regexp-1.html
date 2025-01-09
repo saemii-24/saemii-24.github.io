@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x1f4cc;&#xc2dc;&#xc791;&#xd558;&#xba70;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <hr>
+<p>title: &quot;정규표현식&quot;
+author: saemii
+categories:</p>
+<ul>
+<li>RegExp
+tags:</li>
+<li>[RegExp]
+date: 2025-01-02
+last_modified_at: 2025-01-02
+pin: true</li>
+</ul>
+<hr>
+<h2 id="시작하며">📌시작하며</h2>
+<p>최근 프로그래머스 문제 풀이를 다시 시작했다. 알고리즘 강의를 듣고 있기도 하고, 꾸준히 해서 나쁠건 없으니 말이다.😊
+문제를 풀다 보면, 특정 문제들에서는 정규표현식이 빛을 발하는데, 내가 JS 정규표현식을 완벽하게 숙지하고 있는 것이 아니라 난감할 때가 있다.</p>
+<p>실무에서도 form을 만들 때 정규표현식을 이용해 값을 제한하기도 하는데, 이번 기회에 정규표현식을 정리해보고 숙지해보면 문제를 풀 때에도, 실무에서도 도움이 되리라 생각한다.</p>
+<h2 id="정규표현식">✅정규표현식</h2>
+<p>정규표현식(regular expression)은 문자열에서 <strong>특정 조합을 찾기</strong> 위한 패턴으로, JS에서 제공하는 메서드를 함께 사용할 수 있다.</p>
+<h3 id="정규표현식-생성하기">☑정규표현식 생성하기</h3>
+<p>📌<strong>문자열로 작성</strong></p>
+<p>고정된 패턴의 정규식이라면, 아래와 같이 바로 작성할 수 있다.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> regex = <span class="hljs-regexp">/\w+/</span>
+</code></pre>
+<p>📌<strong>RegExp 생성자</strong></p>
+<p>만약 동적으로 정규표현식을 생성해야 한다면, <code>RegExp</code> 생성자를 이용해 정규 표현식 객체를 생성할 수 있다.
+⭐<code>RegExp</code> 메서드의 첫번째 인자는 정규표현식 패턴을, 두번째 인자는 플래를 전달하며, 둘 다 <strong>문자열</strong> 로 전달해야 함에 주의한다.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> regex1 = <span class="hljs-regexp">/\w+/</span>
+<span class="hljs-keyword">const</span> regex2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">RegExp</span>(<span class="hljs-string">&quot;\\w+&quot;</span>, <span class="hljs-string">&quot;i&quot;</span>)
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(regex1) <span class="hljs-comment">// /\w+/</span>
+</code></pre>
+<p>예를 들어, 사용자가 검색한 단어를 받아 데이터 목록에 그 단어가 있는지 찾아야 할 때를 생각해보자.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> searchKeyword = <span class="hljs-string">&quot;hello&quot;</span> <span class="hljs-comment">// 사용자가 입력한 단어</span>
+<span class="hljs-keyword">const</span> regex = <span class="hljs-keyword">new</span> <span class="hljs-title class_">RegExp</span>(<span class="hljs-string">`<span class="hljs-subst">${searchKeyword}</span>`</span>, <span class="hljs-string">&quot;i&quot;</span>) <span class="hljs-comment">// i를 이용해 대소문자 구분 없이 검색함을 명시</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(regex.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Hello World&quot;</span>)) <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(regex.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Hi&quot;</span>)) <span class="hljs-comment">// false</span>
+</code></pre>
+<p>이런 상황에서는 정규 표현식을 동적으로 사용해야 할 필요성이 있고, 이 때 <code>RegEXp</code> 생성자를 이용하면 된다.</p>
+<h3 id="test">☑test</h3>
+<p><code>test()</code> 메서드를 이용해 위에서 언급한 방법으로 만들어 둔 정규표현식을 문자열에 적용할 수 있다.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> regex1 = <span class="hljs-regexp">/ban*/i</span>
+<span class="hljs-keyword">const</span> regex2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">RegExp</span>(<span class="hljs-string">&quot;ban*&quot;</span>, <span class="hljs-string">&quot;i&quot;</span>)
+
+<span class="hljs-keyword">const</span> str = <span class="hljs-string">&quot;I like banana&quot;</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(regex1.<span class="hljs-title function_">test</span>(str)) <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(regex2.<span class="hljs-title function_">test</span>(str)) <span class="hljs-comment">// true</span>
+</code></pre>
+<h3 id="match">☑match</h3>
+<p>정규표현식을 사용해 특정 문자열에서 원하는 문자의 매칭 결과를 확인할 수 있다. 특별한 플래그가 없다면, 첫 번째로 매칭된 결과만 반환한다.</p>
+<p>먼저 한 자리 이상의 숫자(\d+) 뒤에 '세'가 붙어 있는 문자열을 찾는 정규표현식을 작성하고 적용해보자.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> regex = <span class="hljs-regexp">/\d+세/</span>
+<span class="hljs-keyword">const</span> str =
+  <span class="hljs-string">&quot;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&quot;</span>
+<span class="hljs-keyword">const</span> matchResult = str.<span class="hljs-title function_">match</span>(regex)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(matchResult) <span class="hljs-comment">//[&quot;35세&quot;]</span>
+</code></pre>
+<p>만약. '세'라는 글자가 사용된 단어 여러개를 찾고 싶으면 <code>g</code>플래그를 사용할 수 있다.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> regex = <span class="hljs-regexp">/\d+세/g</span> <span class="hljs-comment">// g 플래그 추가</span>
+<span class="hljs-keyword">const</span> str =
+  <span class="hljs-string">&quot;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&quot;</span>
+<span class="hljs-keyword">const</span> matchResult = str.<span class="hljs-title function_">match</span>(regex)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(matchResult) <span class="hljs-comment">// [&quot;35세&quot;, &quot;29세&quot;, &quot;5세&quot;, &quot;1세&quot;]</span>
+</code></pre>
+<h3 id="matchall">☑matchAll</h3>
+<p>모든 매칭 결과를 배열로 반환하는데, 세부정보를 포함한다.
+matchAll은 항상 <strong>g 플래그</strong> 를 사용해야 한다.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> regex = <span class="hljs-regexp">/\d+세/g</span>
+<span class="hljs-keyword">const</span> str =
+  <span class="hljs-string">&quot;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&quot;</span>
+
+<span class="hljs-keyword">const</span> matchAllResult = [...str.<span class="hljs-title function_">matchAll</span>(regex)]
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(matchAllResult)
+
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//   [</span>
+<span class="hljs-comment">//     &#x27;35세&#x27;,</span>
+<span class="hljs-comment">//     index: 13,</span>
+<span class="hljs-comment">//     input: &#x27;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&#x27;,</span>
+<span class="hljs-comment">//     groups: undefined</span>
+<span class="hljs-comment">//   ],</span>
+<span class="hljs-comment">//   [</span>
+<span class="hljs-comment">//     &#x27;29세&#x27;,</span>
+<span class="hljs-comment">//     index: 23,</span>
+<span class="hljs-comment">//     input: &#x27;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&#x27;,</span>
+<span class="hljs-comment">//     groups: undefined</span>
+<span class="hljs-comment">//   ],</span>
+<span class="hljs-comment">//   [</span>
+<span class="hljs-comment">//     &#x27;5세&#x27;,</span>
+<span class="hljs-comment">//     index: 33,</span>
+<span class="hljs-comment">//     input: &#x27;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&#x27;,</span>
+<span class="hljs-comment">//     groups: undefined</span>
+<span class="hljs-comment">//   ],</span>
+<span class="hljs-comment">//   [</span>
+<span class="hljs-comment">//     &#x27;1세&#x27;,</span>
+<span class="hljs-comment">//     index: 42,</span>
+<span class="hljs-comment">//     input: &#x27;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&#x27;,</span>
+<span class="hljs-comment">//     groups: undefined</span>
+<span class="hljs-comment">//   ]</span>
+<span class="hljs-comment">// ]</span>
+</code></pre>
+<h3 id="exec">☑exec</h3>
+<p>exec 메서드는 정규식을 이용해 문자열에서 매칭된 결과를 세부 정보와 함께 반환한다.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> regex = <span class="hljs-regexp">/\d+세/</span>
+<span class="hljs-keyword">const</span> str =
+  <span class="hljs-string">&quot;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&quot;</span>
+<span class="hljs-keyword">const</span> execResult = regex.<span class="hljs-title function_">exec</span>(str)
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(execResult)
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//   &#x27;35세&#x27;,</span>
+<span class="hljs-comment">//   index: 13, //매칭이 시작된 index 번호</span>
+<span class="hljs-comment">//   input: &#x27;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&#x27;,</span>
+<span class="hljs-comment">//   groups: undefined</span>
+<span class="hljs-comment">// ]</span>
+</code></pre>
+<p>'g' 플래그를 활용하면 n세 라는 단어들의 세부정보를 나타낸다.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> regex = <span class="hljs-regexp">/\d+세/g</span>
+<span class="hljs-keyword">const</span> str =
+  <span class="hljs-string">&quot;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&quot;</span>
+
+<span class="hljs-keyword">let</span> execResult
+<span class="hljs-keyword">while</span> ((execResult = regex.<span class="hljs-title function_">exec</span>(str)) !== <span class="hljs-literal">null</span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(execResult)
+}
+
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//   &#x27;35세&#x27;,</span>
+<span class="hljs-comment">//   index: 13,</span>
+<span class="hljs-comment">//   input: &#x27;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&#x27;,</span>
+<span class="hljs-comment">//   groups: undefined</span>
+<span class="hljs-comment">// ]</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//   &#x27;29세&#x27;,</span>
+<span class="hljs-comment">//   index: 23,</span>
+<span class="hljs-comment">//   input: &#x27;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&#x27;,</span>
+<span class="hljs-comment">//   groups: undefined</span>
+<span class="hljs-comment">// ]</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//   &#x27;5세&#x27;,</span>
+<span class="hljs-comment">//   index: 33,</span>
+<span class="hljs-comment">//   input: &#x27;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&#x27;,</span>
+<span class="hljs-comment">//   groups: undefined</span>
+<span class="hljs-comment">// ]</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//   &#x27;1세&#x27;,</span>
+<span class="hljs-comment">//   index: 42,</span>
+<span class="hljs-comment">//   input: &#x27;짱구 가족 중 신형만은 35세, 봉미선은 29세, 신짱구는 5세, 신짱아는 1세, 흰둥이는 8개월이다.&#x27;,</span>
+<span class="hljs-comment">//   groups: undefined</span>
+<span class="hljs-comment">// ]</span>
+</code></pre>
+<h2 id="플래그">✅플래그</h2>
+<p>위에서 언급한 플래그란 무엇일까?
+만들어 둔 정규표현식의 일종의 옵션이라고 볼 수 있다.</p>
+<h3 id="-g-global">☑ g (global)</h3>
+<p>주어진 문자열에서 해당 정규표현식에 해당하는 문자를 <strong>모두</strong> 찾는다.
+아래의 예제에서는 '짱구' 라는 단어 3가지를 찾았다. (신'짱구'도 인식한다!)</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> regex = <span class="hljs-regexp">/짱구/g</span>
+<span class="hljs-keyword">const</span> str = <span class="hljs-string">&quot;짱구는 못말려의 주인공은 신짱구입니다. 짱구는 정말 못말려요.&quot;</span>
+<span class="hljs-keyword">const</span> matchResult = str.<span class="hljs-title function_">match</span>(regex)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(matchResult) <span class="hljs-comment">// [&quot;짱구&quot;, &quot;짱구&quot;, &quot;짱구&quot;]</span>
+</code></pre>
+<h3 id="-i-ignore-case">☑ i (ignore case)</h3>
+<p>대소문자를 구별하지 않고 찾는다.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> regex = <span class="hljs-regexp">/i/gi</span> <span class="hljs-comment">//전부 찾고자 g 플래그도 추가해 주었다.</span>
+<span class="hljs-keyword">const</span> text = <span class="hljs-string">&quot;I like Lion&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[ &#x27;I&#x27;, &#x27;i&#x27;, &#x27;i&#x27; ]</span>
+
+<span class="hljs-keyword">const</span> regex = <span class="hljs-regexp">/i/i</span> <span class="hljs-comment">//g 플래그를 삭제하면, 처음으로 일치하는 문자열만 보여준다.</span>
+<span class="hljs-keyword">const</span> text = <span class="hljs-string">&quot;I like Lion&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex))
+<span class="hljs-comment">// [ &#x27;I&#x27;,</span>
+<span class="hljs-comment">//   index: 0,</span>
+<span class="hljs-comment">//   input: &#x27;I like Lion&#x27;,</span>
+<span class="hljs-comment">//   groups: undefined</span>
+<span class="hljs-comment">// ]</span>
+</code></pre>
+<h3 id="-m-multiline">☑ m (multiline)</h3>
+<p>여러 line에서 해당하는 문자열을 찾는다.
+m 플래그는 <code>^</code>와 <code>$</code>가 동작하는 방식을 변경하는데, 전체 문자열의 시작과 끝을 나타내는 것이 아닌,
+<code>^</code> 는 각 줄의 시작점을 나타내고, <code>$</code>은 각 줄의 끝을 나타낸다.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> regex = <span class="hljs-regexp">/^신짱구/gm</span>
+<span class="hljs-comment">//여러줄로 작성할 때 들여쓰기가 공백으로 인식되므로 주의한다.</span>
+<span class="hljs-keyword">const</span> str = <span class="hljs-string">`신짱구 가족 중 신형만은 35세, 
+봉미선은 29세, 
+신짱구는 5세, 
+신짱아는 1세, 
+흰둥이는 8개월이다.`</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(str.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[ &#x27;신짱구&#x27;, &#x27;신짱구&#x27; ]</span>
+</code></pre>
+<h2 id="그릅">✅그릅</h2>
+<p><code>[]</code>를 이용해 그룹을 지어 문자들 중 하나를 찾을 수 있다.</p>
+<ul>
+<li><code>/신짱구/</code> '신짱구'라는 하나의 단어를 찾는 것</li>
+<li><code>[신짱구]</code>는 &quot;신&quot;, &quot;짱&quot;, &quot;구&quot; 중 한 글자를 찾는 것</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> regex1 = <span class="hljs-regexp">/신짱구/g</span> <span class="hljs-comment">// 문자열 &quot;신짱구&quot;를 전부 찾음</span>
+<span class="hljs-keyword">const</span> regex2 = <span class="hljs-regexp">/[신짱구]/g</span> <span class="hljs-comment">// &quot;신&quot;, &quot;짱&quot;, &quot;구&quot; 중 하나의 문자를 전부 찾음</span>
+
+<span class="hljs-keyword">const</span> str =
+  <span class="hljs-string">&quot;신짱구는 신서준, 신지호, 신짱군, 신민구 에서 글자를 따와서 만든 이름이다.&quot;</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(str.<span class="hljs-title function_">match</span>(regex1)) <span class="hljs-comment">// [&quot;신짱구&quot;]</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(str.<span class="hljs-title function_">match</span>(regex2)) <span class="hljs-comment">// [&#x27;신&#x27;, &#x27;짱&#x27;, &#x27;구&#x27;, &#x27;신&#x27;, &#x27;신&#x27;, &#x27;신&#x27;, &#x27;짱&#x27;, &#x27;신&#x27;, &#x27;구&#x27;]</span>
+</code></pre>
+<p>이런 특징을 이용해, 아래와 같이 작성할 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th>표현식</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[abc]</code></td>
+<td>문자 <code>a</code>, <code>b</code>, <code>c</code> 중 하나</td>
+</tr>
+<tr>
+<td><code>[A-Z]</code></td>
+<td>대문자 <code>A</code>부터 <code>Z</code> 중 하나</td>
+</tr>
+<tr>
+<td><code>[a-z]</code></td>
+<td>소문자 <code>a</code>부터 <code>z</code> 중 하나</td>
+</tr>
+<tr>
+<td><code>[A-z]</code></td>
+<td>대문자 <code>A</code>부터 소문자 <code>z</code> 중 하나</td>
+</tr>
+<tr>
+<td><code>[가-하]</code></td>
+<td>한글 <code>가</code>부터 <code>하</code> 중 하나</td>
+</tr>
+</tbody>
+</table>
+<h2 id="quantifiers-수량자">✅Quantifiers (수량자)</h2>
+<p>Quantifiers(수량자)는 정규표현식에서 어떤 패턴이 몇 번 반복될지를 지정하는 데 사용</p>
+<ul>
+<li>
+<p><code>+</code></p>
+<ul>
+<li><code>n+</code> 는 하나 이상의 n을 포함하는 모든 문자열과 매칭된다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/짱구+/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구야 놀자~ 내 이름은 신짱구 짱짱구 짱구짱구는 못말려&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[ &#x27;짱구&#x27;, &#x27;짱구&#x27;, &#x27;짱구&#x27;, &#x27;짱구&#x27;, &#x27;짱구&#x27; ]</span>
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/짱+/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구야 놀자~ 내 이름은 신짱구 짱짱구&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[ &#x27;짱&#x27;, &#x27;짱&#x27;, &#x27;짱짱&#x27; ]</span>
+</code></pre>
+<p>위의 예제를 살펴보면 <code>+</code> 앞에 나와있는 글자를 <strong>반복</strong> 하는 내용을 찾아냄을 알 수 있다.</p>
+<p><code>짱구+</code> 의 경우 <strong>짱구</strong> 를 포함하는 문자열과 매칭되므로, <strong>짱구짱구</strong> 의 경우 &quot;짱구&quot;, &quot;짱구&quot; 두 가지를 따로 찾아내게 된다.</p>
+</li>
+<li>
+<p><code>*</code></p>
+<ul>
+<li>앞에 오는 패턴 중 하나라도 일치하면 매칭된다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/짱구*/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구야 놀자~ 내 이름은 신짱구 짱짱구 짱구짱구는 못말려&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[ &#x27;짱구&#x27;, &#x27;짱구&#x27;, &#x27;짱&#x27;, &#x27;짱구&#x27;, &#x27;짱구&#x27;, &#x27;짱구&#x27; ]</span>
+</code></pre>
+<p>위의 <code>+</code> 예제외는 다르게 <strong>짱짱구</strong> 에서 <strong>짱</strong>과 <strong>짱구</strong>를 다르게 검색했다. <code>*</code>는 <strong>앞의 패턴이 없어도 허용</strong>되기 때문에 &quot;짱&quot; 단독으로도 매칭되기 떄문이다. 따라서 <code>+</code> 보다 좀 더 광범위한 검색을 하게 되므로 사용에 주의해야 한다.</p>
+</li>
+<li>
+<p><code>?</code></p>
+<ul>
+<li>바로 앞에 있는 패턴이 0번 또는 1번 등장하는 경우에 매칭된다.</li>
+<li>즉 앞에 있는 패턴이 <strong>선택적</strong> 이란 의미가 된다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/신짱?구/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;신짱구의 이름은 짱구로, 짱을 빼면 신구가 된다.&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[ &#x27;신짱구&#x27;, &#x27;신구&#x27; ]</span>
+</code></pre>
+<p>이 예제를 살펴보면, <strong>신짱구</strong> 라는 패턴에서 <code>짱?</code>을 통해 짱이라는 글자는 선택적임을 명시헀다. 따라서 짱이 있는 <code>신짱구</code> 짱이 없는 <code>신구</code>를 검색하게 된다.</p>
+</li>
+<li>
+<p><code>{X}</code></p>
+<ul>
+<li>정확히 <code>X</code>번 반복하는 패턴을 찾는다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;100, 1000 or 10000?&quot;</span>
+<span class="hljs-keyword">let</span> pattern = <span class="hljs-regexp">/\d{4}/g</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(pattern)) <span class="hljs-comment">// [&quot;1000&quot;, &quot;1000&quot;]</span>
+</code></pre>
+<p><code>d</code>는 숫자를 나타내므로, 숫자가 4번 반복되는 패턴을 찾는다.</p>
+</li>
+<li>
+<p><code>{X,Y}</code></p>
+<ul>
+<li>X번 이상 Y번 이하로 반복되는 패턴을 매칭한다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;100, 1000 or 10000?&quot;</span>
+<span class="hljs-keyword">let</span> pattern = <span class="hljs-regexp">/\d{3,4}/g</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(pattern)) <span class="hljs-comment">//[ &#x27;100&#x27;, &#x27;1000&#x27;, &#x27;1000&#x27; ]</span>
+</code></pre>
+<p><code>d</code>는 숫자를 나타내므로, 숫자가 3번 이상, 4번 이하로 반복되는 패턴을 찾는다.</p>
+</li>
+<li>
+<p><code>{X,}</code></p>
+<ul>
+<li>X번 이상 반복되는 패턴을 매칭한다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;1, 10, 100, 1000 or 10000?&quot;</span>
+<span class="hljs-keyword">let</span> pattern = <span class="hljs-regexp">/\d{3,}/g</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(pattern)) <span class="hljs-comment">//[ &#x27;100&#x27;, &#x27;1000&#x27;, &#x27;10000&#x27; ]</span>
+</code></pre>
+</li>
+<li>
+<p><code>$</code></p>
+<ul>
+<li>text 마지막에 특정 문자가 있는지 확인한다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/is$/</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;Is this his&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex))
+<span class="hljs-comment">//[ &#x27;is&#x27;, index: 9, input: &#x27;Is this his&#x27;, groups: undefined ]</span>
+</code></pre>
+<p>is로 문장이 종료되었기 때문에 자세한 정보가 출력된다.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/is$/</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;Is this hers&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//null</span>
+</code></pre>
+<p>is로 문장이 종료되지 않았기 때문에 null이 출력된다.</p>
+</li>
+<li>
+<p><code>^</code></p>
+<ul>
+<li>text가 특정 문자로 시작하는지 확인한다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/^Is/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;Is this his&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[&quot;Is&quot;];</span>
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/^Is/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;Are there his books?&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//null</span>
+</code></pre>
+</li>
+<li>
+<p><code>?=</code></p>
+<ul>
+<li><strong>특정 패턴</strong> 이 뒤따라야 한다.</li>
+<li>테스트를 수행한 뒤의 뒤따라야 하는 <strong>특정 패턴</strong> 은 매칭 결과에 포함되지 않는다.</li>
+<li>해당 문자가 정확히 일치해야 하므로, 이어지는 특정 패턴은 <strong>띄어쓰기</strong> 를 해서 찾으려고 하는 문자와 다음 패턴을 분리해야 한다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/짱구(?= 엄마)/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구 엄마 이름은 봉미선, 짱구 아빠 이름은 신형만&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[&#x27;짱구&#x27;]</span>
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/짱구(?= 엄마)/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구엄마 이름은 봉미선, 짱구아빠 이름은 신형만&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//null</span>
+</code></pre>
+</li>
+<li>
+<p><code>?!</code></p>
+<ul>
+<li><strong>특정 패턴</strong> 이 뒤따르지 않는지 검사한다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/짱구(?! 엄마)/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구 엄마 이름은 봉미선&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//null</span>
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/짱구(?! 엄마)/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구 아빠 이름은 신형만&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[&#x27;짱구&#x27;]</span>
+</code></pre>
+<p>이 예제에서 <code>짱구</code> 다음 <code>엄마</code>가 등장하지 않기 떄문에 <code>짱구</code>를 찾아낸다.</p>
+</li>
+</ul>
+<h2 id="metacharacter-메타문자">✅Metacharacter (메타문자)</h2>
+<p>**✅Metacharacter(메타문자)**는 정규 표현식에서 검색 조건, 텍스트 조작 방식을 정의하는 특별한 문자다.</p>
+<ul>
+<li>
+<p><code>.</code></p>
+<ul>
+<li><code>.</code>은 임의의 한 문자를 의미한다.</li>
+<li>예를 들어, <code>A.B</code>로 작성할 때는, A와 B사이에 어떤 한 문자가 들어간 문자열을 찾는다.</li>
+<li><code>.</code>도 하나의 문자를 나타내므로 이때 <code>AB</code> 는 검색되지 않음에 주의한다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/신.구/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;신짱구 신형구 신진구 신짱아 김짱구 제갈신짱구&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[ &#x27;신짱구&#x27;, &#x27;신형구&#x27;, &#x27;신진구&#x27;, &#x27;신짱구&#x27; ]</span>
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/신짱.구/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;신짱일구 신짱이구 신짱삼구 신짱구 김짱구 제갈신짱구&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[ &#x27;신짱일구&#x27;, &#x27;신짱이구&#x27;, &#x27;신짱삼구&#x27; ]</span>
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/신짱..구/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;신짱일이구 신짱이삼구 신짱사구 신짱구 김짱구 제갈신짱구&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[ &#x27;신짱일이구&#x27;, &#x27;신짱이삼구&#x27; ]</span>
+</code></pre>
+<p><code>신짱</code>과 <code>구</code> 사이에 <strong>임의의 두 문자</strong> 가 들어가야 함을 명시했으므로, <code>신짱사구</code>, <code>신짱구</code>는 매칭되지 않는다.</p>
+</li>
+<li>
+<p><code>\w</code></p>
+<ul>
+<li>word character(단어 문자)를 의미한다.
+<ul>
+<li>알파벳 대소문자 ([a-z], [A-Z])</li>
+<li>숫자 ([0-9])</li>
+<li>언더스코어 (_)</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/\w/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;올해 5살인 짱구의 ID는 shin_5@ 이다.&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[&quot;5&quot;, &quot;I&quot;, &quot;D&quot;, &quot;s&quot;, &quot;h&quot;, &quot;i&quot;, &quot;n&quot;, &quot;_&quot;, &quot;5&quot;]</span>
+</code></pre>
+<p>한글은 단어문자에 포함되지 않으므로 <strong>매칭되지 않으며</strong>, 알파벳 대소문자, 숫자, 언더스코어가 한글자씩 매칭된다.</p>
+</li>
+<li>
+<p><code>\W</code></p>
+<ul>
+<li>단어 문자가 아닌 것과 매칭된다.</li>
+<li>공백도 단어 문자가 아니므로 매칭된다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/\W/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;올해 5살인 짱구의 ID는 shin_5@ 이다.&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex))
+<span class="hljs-comment">//[&quot;올&quot;, &quot;해&quot;, &quot; &quot;, &quot;살&quot;, &quot;인&quot;, &quot; &quot;, &quot;짱&quot;, &quot;구&quot;, &quot;의&quot;, &quot; &quot;, &quot;는&quot;, &quot; &quot;, &quot;@&quot;, &quot; &quot;, &quot;이&quot;, &quot;다&quot;, &quot;.&quot;];</span>
+</code></pre>
+</li>
+</ul>
+<p>-<code>\b</code></p>
+<ul>
+<li>
+<p>단어 경계를 나타낸다.</p>
+<ul>
+<li>단어 경계는 단어 문자와 비-단어 문자 사이를 의미한다.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>--</th>
+<th>--</th>
+<th>--</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>--</td>
+<td>--</td>
+<td>--</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p>-<code>\B</code></p>
+<ul>
+<li>
+<p>비단어 경계를 나타낸다.</p>
+</li>
+<li>
+<p><code>\d</code></p>
+<ul>
+<li>숫자와 매칭된다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/\d/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구는 5살, 짱아는 1살로 4살 터울의 남매다.&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[ &#x27;5&#x27;, &#x27;1&#x27;, &#x27;4&#x27; ]</span>
+</code></pre>
+</li>
+<li>
+<p><code>\D</code></p>
+<ul>
+<li>숫자가 아닌 문자와 매칭된다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/\D/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구는 5살&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[ &#x27;짱&#x27;, &#x27;구&#x27;, &#x27;는&#x27;, &#x27; &#x27;, &#x27;살&#x27; ]</span>
+</code></pre>
+</li>
+<li>
+<p><code>\s</code></p>
+<ul>
+<li>공백과 매칭된다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/\s/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구는 5살&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[ &#x27; &#x27; ]</span>
+</code></pre>
+</li>
+<li>
+<p><code>\S</code></p>
+<ul>
+<li>공백이 아닌 것과 매칭된다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/\S/g</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구는 5살&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//[ &#x27;짱&#x27;, &#x27;구&#x27;, &#x27;는&#x27;, &#x27;5&#x27;, &#x27;살&#x27; ]</span>
+</code></pre>
+</li>
+<li>
+<p><code>\0</code></p>
+<ul>
+<li>null 문자가 있는지 찾는다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/\0/</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구야 놀자~ \0 떡잎마을방범대 출동!&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex))
+<span class="hljs-comment">//[</span>
+<span class="hljs-comment">//   &#x27;\x00&#x27;,</span>
+<span class="hljs-comment">//   index: 8,</span>
+<span class="hljs-comment">//   input: &#x27;짱구야 놀자~ \x00 떡잎마을방범대 출동!&#x27;,</span>
+<span class="hljs-comment">//   groups: undefined</span>
+<span class="hljs-comment">// ]</span>
+</code></pre>
+<p>null문자가 없는 경우에는 null을 출력한다.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/\0/</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구야 놀자~ 떡잎마을방범대 출동!&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//null</span>
+</code></pre>
+</li>
+<li>
+<p><code>\n</code></p>
+<ul>
+<li>줄바꿈 문자가 포함되었는지 찾는다.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/\n/</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구야 놀자~ /\n 떡잎마을방범대 출동!&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex))
+<span class="hljs-comment">// [ &#x27;\n&#x27;, index: 9, input: &#x27;짱구야 놀자~ /\n 떡잎마을방범대 출동!&#x27;, groups: undefined ]</span>
+</code></pre>
+<p>줄바꿈 문자가 없는 경우에는 null을 출력한다.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/\n/</span>
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;짱구야 놀자~ 떡잎마을방범대 출동!&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">match</span>(regex)) <span class="hljs-comment">//null</span>
+</code></pre>
+</li>
+<li>
+<p><code>\f</code></p>
+</li>
+<li>
+<p><code>\r</code></p>
+</li>
+<li>
+<p><code>\t</code></p>
+</li>
+<li>
+<p><code>\v</code></p>
+</li>
+<li>
+<p><code>\xxx</code></p>
+</li>
+<li>
+<p><code>\xdd</code></p>
+</li>
+<li>
+<p><code>\uxxxx</code></p>
+</li>
+</ul>
+<h2 id="️참고-사이트">🗂️참고 사이트</h2>
+<ul>
+<li><a href="https://www.w3schools.com/jsref/jsref_obj_regexp.asp">https://www.w3schools.com/jsref/jsref_obj_regexp.asp</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Regular_expressions">https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Regular_expressions</a></li>
+</ul>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
