@@ -124,13 +124,100 @@ export default function TailwindFour() {
 > **증분 빌드(incremental builds)**
 > 소프트웨어 빌시 변경된 부분만 빌드하는 방법
 
-## ✅최신 웹과 어울림
+## :star:CSS 중심의 통합적인 커스텀 방식
 
-Tailwind CSS v3.0 출시 이후 플랫폼이 많이 발전하였고, v4.0은 이러한 개선 사항을 최대한 활용한다.
+큰 변화 중 하나인데, 프로젝트를 구성할 때 `tailwind.config.js` 의 JavaScript를 사용하는 대신, CSS로 구성하도록 변경되었다.
 
-### 🌷Native cascade layers
+### 🌷3.0 버전의 tailwind.config.js
 
-다양한 스타일 규칙이 서로 상호 작용하는 방식을 잘 제어할 수 있게 해준다.
+3.0버전의 경우 아래와 같이 파일을 작성해서 tailwind를 설정해주었다.
+아래는 `lime`이란 color를 정의해준 예시이다.
+
+```javascript
+import type { Config } from "tailwindcss";
+
+export default {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        'line': "#B2F300",
+      },
+    },
+  },
+  plugins: [],
+} satisfies Config;
+
+```
+
+### 🌷4.0 버전의 CSS
+
+`globals.css`에 다음과 같이 작성하자.
+
+```css
+@import "tailwindcss";
+
+@theme {
+  --color-lime: #b2f300;
+}
+```
+
+해당 구문을 해석하면 <u>color에 lime이란 이름을 가진 색을 추가하겠다</u> 가 되고,
+실제 사용방식은 동일하다.
+
+```html
+<button className="px-4 py-2 bg-lime ring-3">버튼입니다</button>
+<button className="px-4 py-2 text-lime ring-3">버튼입니다</button>
+```
+
+그러면 위에서 정의한 lime 색이 정확히 적용된 모습을 보인다!
+추가로, 4.0에서의 ring 컬러는 `currentColor`가 적용되어, text 색상인 lime 색과 동일한 색을 띄게 된다.
+
+## :star:keyframe animation 정의하기
+
+이번엔 animation을 정의해보자. 위와 동일하게 CSS에서 작성한다.
+
+keyframe을 정의하는 방식은 기존 CSS 작성방식과 동일하며,
+`@theme`에 사용 등록만 해주면 된다.
+
+```css
+@import "tailwindcss";
+
+@theme {
+  --color-lime: #b2f300;
+
+  --animate-scale-up: scale-up 2s ease-out;
+}
+
+@keyframes scale-up {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+```
+
+실제 컴포넌트에 적용은 다음과 같다.
+
+```html
+<div className="size-20 bg-lime animate-scale-up "></div>
+```
+
+## 👏마무리 하며
+
+앞으로 좀 더 사용해보야 알겠지만, 전반적으로 업데이트 내용은 마음에 든다!
+이해하기 아주 어려운 업데이트 내용은 크게 없는 것 같고😊
+
+그런데, 이 포스팅 연습용으로 사용한 repo는 vercel로 github push때마다 배포를 시도하게 해두었는데, tailwind 4.0 업데이트 이후 배포가 안되었다(!)
+이유는 기존에 설치해둔 tailwind 관련 eslint 라이브러리와 tailwind 4.0이 호환되지 않아서 였는데 해당 라이브러리를 최신버전으로 업그레이드 해도 문제가 발생해서...🤔
+
+지금 내가 회사 업무에도 사용하고 있는 라이브러리이기 때문에, 약간 시간을 두고 4.0을 점진적으로 도입하는게 좋을 듯하다.
 
 ## 🗂️참고 사이트
 
