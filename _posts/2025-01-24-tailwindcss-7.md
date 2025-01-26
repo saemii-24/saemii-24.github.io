@@ -107,12 +107,12 @@ export default function TailwindFour() {
 }
 ```
 
-## ✅기본 border 컬러 변경
+### 🌷기본 border 컬러 변경
 
 - v3: 기본적으로 `border` 의 색상이 `gray-200` 이었다.
 - v4: `currentColor`와 동일한 색상으로 설정된다. (브라우저의 기본 동작과 일치함)
 
-## ✅기본 placeholder 컬러 변경
+### 🌷기본 placeholder 컬러 변경
 
 - v3: 기본적으로 `placeholder` 의 색상이 `gray-400` 이었다.
 - v4: `currentColor`의 50% opacity로 설정된다.
@@ -209,6 +209,43 @@ keyframe을 정의하는 방식은 기존 CSS 작성방식과 동일하며,
 <div className="size-20 bg-lime animate-scale-up "></div>
 ```
 
+## ✅@container queries
+
+CSS의 최신 기능인 container queries의 기능이 추가 되었다.
+사실 실무에서 직접적으로 사용해보지는 않은 기능이라, 일단 내용부터 꼼꼼히 확인하는게 좋을 것 같아, 다음 글에서 container queries의 사용법을 중점적으로 다뤄보려고 한다.
+
+### 🌷container queries
+
+<!-- 반응형 웹을 만들때, `@media`를 활용해 뷰포트 기준으로 break-point를 정하고, 그에 맞춰 컴포넌트를 변경하게 된다.
+
+하지만 웹 디자인에서 이 '뷰포트' 기준이 불편할 때가 있는데,  -->
+
+컨테이너 쿼리는 뷰포트를 기준으로 하는 `@media` 쿼리와 다르게, 요소의 컨테이너 크기에 따라 스타일을 지정할 수 있다.
+
+```javascript
+const ContainerQueries = () => {
+  return (
+    {/* 클릭 시 컨테이너 크기 변경*/}
+				<div
+					className={cn('@container bg-lime cursor-pointer ', {
+						'w-[100px]': isSmall,
+						'w-[200px]': !isSmall,
+					})}
+					onClick={() => {
+						setIsSmall(!isSmall);
+					}}>
+					{/* 텍스트: 컨테이너 크기에 따라 글씨 색이 변경됨 */}
+					<div
+						className={`text-center @sm:text-xs  @sm:text-red-500 @md:text-blue-500 @md:text-2xl text-black`}>
+						{isSmall
+							? '컨테이너가 작아져, 글씨가 작아졌습니다.'
+							: '컨테이너가 커져 글씨가 커졌습니다.'}
+					</div>
+				</div>
+  )
+}
+```
+
 ## 👏마무리 하며
 
 앞으로 좀 더 사용해보야 알겠지만, 전반적으로 업데이트 내용은 마음에 든다!
@@ -223,3 +260,4 @@ keyframe을 정의하는 방식은 기존 CSS 작성방식과 동일하며,
 
 - <https://learn.microsoft.com/ko-kr/visualstudio/msbuild/incremental-builds?view=vs-2022>
 - <https://tailwindcss.com/blog/tailwindcss-v4>
+- <https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries>
