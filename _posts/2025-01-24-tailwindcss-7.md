@@ -212,18 +212,33 @@ keyframe을 정의하는 방식은 기존 CSS 작성방식과 동일하며,
 ## ✅@container queries
 
 CSS의 최신 기능인 container queries의 기능이 추가 되었다.
-사실 실무에서 직접적으로 사용해보지는 않은 기능이라, 일단 내용부터 꼼꼼히 확인하는게 좋을 것 같아, 다음 글에서 container queries의 사용법을 중점적으로 다뤄보려고 한다.
 
 ### 🌷container queries
 
-<!-- 반응형 웹을 만들때, `@media`를 활용해 뷰포트 기준으로 break-point를 정하고, 그에 맞춰 컴포넌트를 변경하게 된다.
-
-하지만 웹 디자인에서 이 '뷰포트' 기준이 불편할 때가 있는데,  -->
-
 컨테이너 쿼리는 뷰포트를 기준으로 하는 `@media` 쿼리와 다르게, 요소의 컨테이너 크기에 따라 스타일을 지정할 수 있다.
+아래 예제를 살펴보자.
+
+먼저 `globals.css`에 다음과 같이 컨테이너 크기를 지정해주었다.
+
+```css
+@import "tailwindcss";
+
+@theme {
+  --container-sm: 100px;
+  --container-md: 200px;
+}
+```
+
+컴포넌트를 이어서 살펴보자. 해당 예제는 부모 `div`를 클릭하면 **컨테이너** 크기가 변경되며,
+`@sm`과 `@md`로 컨테이너 사이즈에 따라 조건부 css를 적용했다.
+
+즉, container 사이즈가 `@sm`일때 `text-red-500`과 `text-xs`를 적용하며
+container가 `@md` 인 경우엔 `text-blue-500`과 `text-2xl`이 적용된다.
 
 ```javascript
 const ContainerQueries = () => {
+  const [isSmall, setIsSmall] = useState<boolean>(false);
+
   return (
     {/* 클릭 시 컨테이너 크기 변경*/}
 				<div
@@ -234,9 +249,9 @@ const ContainerQueries = () => {
 					onClick={() => {
 						setIsSmall(!isSmall);
 					}}>
-					{/* 텍스트: 컨테이너 크기에 따라 글씨 색이 변경됨 */}
+					{/* 컨테이너 크기에 따라 글씨 색과 크기가 변경됨 */}
 					<div
-						className={`text-center @sm:text-xs  @sm:text-red-500 @md:text-blue-500 @md:text-2xl text-black`}>
+						className={`text-center @sm:text-xs @sm:text-red-500 @md:text-blue-500 @md:text-2xl text-black`}>
 						{isSmall
 							? '컨테이너가 작아져, 글씨가 작아졌습니다.'
 							: '컨테이너가 커져 글씨가 커졌습니다.'}
@@ -245,6 +260,33 @@ const ContainerQueries = () => {
   )
 }
 ```
+
+`min` `max`값을 지정해줄 수 있다.
+
+```javascript
+<div
+  className={cn("@container bg-gray-200 ", {
+    "w-[50px]": size === "xs",
+    "w-[100px]": size === "sm",
+    "w-[200px]": size === "md",
+    "w-[300px]": size === "lg",
+  })}
+>
+  <div className="@sm:text-red-500 @md:text-green-500 @lg:text-blue-500 @xs:@max-md:text-2xl">
+    현재 {size} 사이즈에 맞는 CSS가 적용되었습니다.
+  </div>
+</div>
+```
+
+예제와 같이 `@xs:@max-md:text-2xl`을 이용해 `xs~md`사이즈까지만 특정 css를 적용해 줄 수 있다.
+
+## ✅@starting-style
+
+CSS의 `@starting-style` 의 기능이 들어왔다. 처음보는 기능이라 [MDN 사이트](https://developer.mozilla.org/en-US/docs/Web/CSS/@starting-style)에 들어가봤는데, 아직 Firefox에서는 사용이 불가능했지만, 대부분의 브라우저에서 사용 가능했다.
+
+`@starting-style`은 요소가 처음 DOM에 렌더링되거나, `display: none`에서 `visible`로 전환될 때 초기 상태를 설정하는 데 사용된다. 즉 요소가 처음 표시될 때 스타일을 지정하거나 부드러운 애니메이션을 넣어줄 수 있다.
+
+이 설명에 바로 떠오르는 것은 바로 popup이나 modal 창이다.
 
 ## 👏마무리 하며
 
