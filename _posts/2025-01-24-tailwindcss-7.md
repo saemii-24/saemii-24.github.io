@@ -286,7 +286,105 @@ CSS의 `@starting-style` 의 기능이 들어왔다. 처음보는 기능이라 [
 
 `@starting-style`은 요소가 처음 DOM에 렌더링되거나, `display: none`에서 `visible`로 전환될 때 초기 상태를 설정하는 데 사용된다. 즉 요소가 처음 표시될 때 스타일을 지정하거나 부드러운 애니메이션을 넣어줄 수 있다.
 
-이 설명에 바로 떠오르는 것은 바로 popup이나 modal 창이다.
+이 설명에 바로 떠오르는 것은 바로 popup이나 modal창이다.
+
+자세한 사항은 [다음 포스팅]()을 참고한다.
+
+## :star:gradient 확장
+
+그라디언트를 더욱 다양하게 활용할 수 있는 유틸리티가 추가되었다.
+
+gradient에 linear만 지원하는 것이 아닌 다른 형태도 함께 지원하면서 기존의 linear형태의 gradient의 경우 `bg-gradient-*`에서 `bg-linear-*`로 이름이 변경되었다!
+
+### 🌷선형 그라디언트와 각도
+
+선형 그라디언트에 각도를 쉽게 넣을 수 있다.
+사용 방식은 `linear-각도`와 같다.
+
+사용자가 원하는 각도의 경우 `bg-linear-[190deg]`와 같은 방식으로 작성한다.
+
+```javascript
+import React from "react"
+
+const Gradient = () => {
+  return (
+    <div className=" w-full p-6">
+      <h1 className="text-2xl font-semibold">그라디언트</h1>
+      <h2 className="text-xl font-semibold mt-5">각도</h2>
+      <div className="**:size-20 **:rounded-sm **:text-white **:via-purple-500 **:to-pink-500 **:from-indigo-500 space-y-2">
+        <div className="bg-linear-45">45</div>
+        <div className="bg-linear-90">90</div>
+        <div className="bg-linear-180">180</div>
+        <div className="bg-linear-[190deg]">190</div>
+        <div className="bg-linear-270">270</div>
+      </div>
+    </div>
+  )
+}
+
+export default Gradient
+```
+
+### 🌷색상 제어
+
+[색상 보간(interpolation)](https://developer.mozilla.org/ko/docs/Glossary/Interpolation) 방식을 제어할 수 있는 모디파이어(modifier)가 추가되었다.
+
+> **색상 보간**
+> 보간이란, 알려진 값을 기반으로 값을 계산하는 프로세스를 의미한다. 그라디언트에서는 제공된 색상 목록을 기반으로 색상의 중간 값을 정의하는 데 사용된다.
+
+작성할 때는 다음과 같이
+`bg-linear-to-r/srgb`, `bg-linear-to-r/oklch`와 같이 작성한다.
+tailwind 4.0에서는 oklch 방식이 기본 적용되기 떄문에, oklch 방식을 사용할 땐 굳이 작성하지 않아도 된다.
+
+```javascript
+import React from "react"
+
+const Gradient = () => {
+  return (
+    <div className=" w-full p-6">
+      <h2 className="text-xl font-semibold mt-5">색상</h2>
+      <div className="**:size-20 **:rounded-sm **via-purple-500 **:to-pink-500 **:from-indigo-500 space-y-2  **:text-white">
+        <div className="bg-linear-to-r/srgb">srgb</div>
+        <div className="bg-linear-to-r/oklch">oklch</div>
+      </div>
+    </div>
+  )
+}
+
+export default Gradient
+```
+
+### 🌷원뿔형과 방사형
+
+원뿔형, 방사형 그래디언트를 생성하기 위한 유틸리티가 추가되었다.
+`bg-conic-_`, `bg-radial-_` 로 작성하면 된다.
+
+```javascript
+import React from "react"
+
+const Gradient = () => {
+  return (
+    <div className=" w-full p-6">
+      <h2 className="text-xl font-semibold mt-5">원뿔형</h2>
+      <div className="size-20 rounded-sm bg-conic/[in_hsl_longer_hue] from-red-600 to-red-600">
+        원뿔
+      </div>
+      <h2 className="text-xl font-semibold mt-5">방사형</h2>
+      <div className="size-20 rounded-full bg-radial-[at_25%_25%] from-white to-zinc-900 to-75%">
+        방사
+      </div>
+    </div>
+  )
+}
+
+export default Gradient
+```
+
+## :star:자식요소 CSS
+
+자식요소에 한 번에 CSS를 줄 수 있는 방법이 생겨났다!
+
+### 🌷직계 요소
 
 ## 👏마무리 하며
 
