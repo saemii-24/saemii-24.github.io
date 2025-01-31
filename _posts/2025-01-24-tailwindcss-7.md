@@ -386,15 +386,169 @@ export default Gradient
 
 ### 🌷직계 요소
 
+직계 요소는 `*:~`를 사용해 작성한다.
+
+아래 예제에서는 이 규칙을 이용해 `<li>` 태그에 스타일을 주었다.
+
+```javascript
+export default function Children() {
+  return (
+    <Container>
+      <Container.Title>자식요소</Container.Title>
+      <Container.SubTitle>직계</Container.SubTitle>
+      <div className="mt-3">
+        <ul className="flex gap-2 *:rounded-full *:border *:border-sky-100 *:bg-sky-50 *:px-2 *:py-0.5 *:text-sky-500">
+          {hutaba.map((item, index) => {
+            return <li key={item.name}>{item.name}</li>
+          })}
+        </ul>
+      </div>
+    </Container>
+  )
+}
+```
+
+### 🌷자손 요소
+
+아래 자손 요소 모두에 스타일을 주고 싶다면 `**:~` 규칙을 사용한다.
+
+이때, `data-*` 규칙을 이용해 특정 tag들만 CSS를 줄 수 있다!
+아래는 `<p>`태그에 `data-birth` 라고 이름을 지어 주고, `ul` 태그에 `**:data-birth:text-gray-500` 와 같은 방식으로 한 번에 스타일을 주었다.
+
+```javascript
+export default function Children() {
+  return (
+    <Container>
+      <Container.SubTitle>모든 자손</Container.SubTitle>
+      <ul className="**:data-avatar:size-12 **:data-avatar:rounded-full **:data-birth:text-gray-500 **:data-birth:text-xs **:text-sky-500 space-y-2 mt-3">
+        {hutaba.map((item, index) => {
+          return (
+            <li key={item.name} className="flex items-center gap-4">
+              <div data-avatar className="border overflow-hidden">
+                <Image
+                  src={item.src}
+                  alt={item.name}
+                  width={100}
+                  height={100}
+                />
+              </div>
+              <div>
+                <p>{item.name}</p>
+                <p data-birth className="">
+                  {item.birth}
+                </p>
+              </div>
+            </li>
+          )
+        })}
+      </ul>
+    </Container>
+  )
+}
+```
+
+## ✅not
+
+`not`을 이용해 특정 상황이 아닐 때만 CSS를 줄 수 있다!
+특히 **checked가 되지 않았을 때(not)** 와 같은 상황에 활용도가 좋다.
+
+```javascript
+export default function Not() {
+  return (
+    <Container>
+      <Container.Title>not</Container.Title>
+      <div className="space-y-5">
+        <div className="not-hover:opacity-75 bg-blue-500 p-4 text-white cursor-pointer">
+          마우스를 올리지 않으면 투명도 75%
+        </div>
+        <label className="flex items-center space-x-2">
+          <input type="checkbox" id="apple" className="hidden peer" />
+          <div className="peer-not-checked:bg-red-500 peer-checked:bg-green-500 text-white px-4 py-2 cursor-pointer">
+            체크하면 초록색, 해제하면 빨간색
+          </div>
+        </label>
+      </div>
+    </Container>
+  )
+}
+```
+
+## ✅Dynamic Utility
+
+4.0버전에서는 더 다양한 **임의의 값**을 쓸 수 있게 변경되었다.
+
+예를 들어, grid 컬럼을 15개를 쓰고 싶을 때, 기존 3버전에서는 해당 값이 tailwind에 미리 등록되지 않았으므로,
+`grid-cols-[15]`와 같이 작성해야 했으나, 이제는 그냥 `grid-cols-15`로 써도 알아서 처리된다.
+
+동일하게, `mt-11`이나 `mt-13`과 같이 기존에는 사용할 수 없던 class도 알아서 처리된다!
+
+```javascript
+import Container from "@/components/Container"
+
+export default function Dynamic() {
+  return (
+    <Container>
+      <Container.Title>Dynamic Utility</Container.Title>
+      <div className="grid grid-cols-15 gap-2 **:size-4 **:text-xs **:text-white **:bg-blue-500">
+        {Array.from({ length: 30 }).map((_, index) => (
+          <div key={index}>{index + 1}</div>
+        ))}
+      </div>
+      <div className="mt-11 grid grid-cols-17 gap-2 **:size-4 **:text-xs **:text-white **:bg-red-500">
+        {Array.from({ length: 30 }).map((_, index) => (
+          <div key={index}>{index + 1}</div>
+        ))}
+      </div>
+      <div className="mt-13 grid grid-cols-11 gap-2 **:size-4 **:text-xs **:text-white **:bg-green-500">
+        {Array.from({ length: 30 }).map((_, index) => (
+          <div key={index}>{index + 1}</div>
+        ))}
+      </div>
+    </Container>
+  )
+}
+```
+
+이게 가능한 이유는, Tailwind의 **기본 간격 단위인 --spacing**을 기반으로 자동 계산되기 때문이다.
+
+```css
+@layer theme {
+  :root {
+    --spacing: 0.25rem;
+  }
+}
+@layer utilities {
+  .mt-8 {
+    margin-top: calc(var(--spacing) * 8);
+  }
+  .w-17 {
+    width: calc(var(--spacing) * 17);
+  }
+  .pr-29 {
+    padding-right: calc(var(--spacing) * 29);
+  }
+}
+```
+
 ## 👏마무리 하며
 
-앞으로 좀 더 사용해보야 알겠지만, 전반적으로 업데이트 내용은 마음에 든다!
-이해하기 아주 어려운 업데이트 내용은 크게 없는 것 같고😊
+결론부터 말하자면, 정말 마음에 드는 업데이트다! 자손 요소에 한 번에 CSS를 지정해주는 게 너무 편리해서 얼른 도입하고 싶을정도....
 
-그런데, 이 포스팅 연습용으로 사용한 repo는 vercel로 github push때마다 배포를 시도하게 해두었는데, tailwind 4.0 업데이트 이후 배포가 안되었다(!)
-이유는 기존에 설치해둔 tailwind 관련 eslint 라이브러리와 tailwind 4.0이 호환되지 않아서 였는데 해당 라이브러리를 최신버전으로 업그레이드 해도 문제가 발생해서...🤔
+그런데, 이 포스팅 연습용으로 사용한 repo는 vercel로 github push때마다 배포를 시도하게 해두었는데, tailwind 4.0 업데이트 하자 배포가 안되었다(!)
+기존에 설치해둔 tailwind 관련 eslint 라이브러리와 tailwind 4.0이 호환되지 않았기 때문이다...🤔
 
-지금 내가 회사 업무에도 사용하고 있는 라이브러리이기 때문에, 약간 시간을 두고 4.0을 점진적으로 도입하는게 좋을 듯하다.
+언제쯤 업데이트가 될지 궁금해서 해당 라이브러리의 깃허브를 찾아가 보니 이미 많은 사람들이 업데이트에 대해 문의해두었으나,
+시간이 다소 소요될 것이라는 답이 달려있었다.😅
+나의 여가 생활에 하는 프로젝트이기 때문이다 라는 말에 (그건 그렇네요...)하게 되는 것은 덤 (ㅎㅎ)
+
+코드 품질을 위한 tailwind의 eslint를 적용하는 것에 관련된 라이브러리기 때문에 아예 없는 상태에서 대형 프로젝트를 시작하는 것은
+피하고 싶어서 아무래도, 실제 프로젝트 도입은 조금 더 미뤄지게 되겠지만,
+개인적으로 진행할 때는 적극적으로 사용할 계획이다!
+
+이번 업데이트는 공식 릴리즈 이틀 후에 공식 docs를 보면서 예제를 만들어 보고, 기록해보았는데
+훨씬 이해하기도 쉽고, 몰랐던 기존 tailwind 기능을 더 많이 알 수 있어서 너무 만족스러웠다.😊
+
+회사에서, 이 기능을 공유할 수 있길 바라며, 이번 포스팅은 여기서 끝!
 
 ## 🗂️참고 사이트
 
