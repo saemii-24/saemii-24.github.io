@@ -3,7 +3,7 @@
 title: "에러 핸들링 - error.tsx"
 author: saemii
 categories: 
-tags: - [Next.js]
+tags: - [Next.js, Error]
 date: 2025-02-16
 last_modified_at: 2025-02-16
 pin: true
