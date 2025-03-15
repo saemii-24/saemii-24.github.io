@@ -72,6 +72,19 @@ cookie 및 searchParams 속성과 같은 동적 API는 전체 경로를 동적 �
 
 ### 🧡 Data fetching and caching
 
+**🔹Server Components**
+서버 컴포넌트를 사용해 서버에서 데이터를 가져올 때 얻을 수 있는 이점을 사용한다.
+**🔹Route Handlers**
+라우터 핸들러를 사용해 클라이언트 컴포넌트에서 백엔드 리소스애 접근한다. 단 추가 서버 요청을 피하기 위해 서버 컴포넌트에서 라우트 핸들러를 호출하지 않는 것이 좋다.
+**🔹Streaming**
+로딩 UI, React의 `<Suspense>`를 사용해 서버에서 클라이언트로 UI를 점진적으로 가져오도록 하여, 데이터를 가져오는 동안 전체 경로가 blocking 되는 것을 방지한다.
+**🔹Parallel Data Fetching**
+적절한 경우 병렬로 데이터를 fetching하여 네트워크 waterfalls(지연)을 줄인다. 또한 적절한 경우 데이터를 미리 로드앟는 것도 고려할 수 있다.
+**🔹Data Caching**
+데이터 요청이 캐시되고 있는지 여부를 확인하고 가능하면 캐싱을 선택한다. 또한 fetch를 사용하지 않고 데이터를 요청하는 경우에도 캐싱이 적용되는지 확인해야 한다.
+**🔹Static Images**
+`public` 디렉토리를 사용하면 애플리케이션의 static assets (이미지 등)을 자동으로 캐싱한다.
+
 ### 💛 UI and accessibility
 
 ### 💚 Security
@@ -82,9 +95,40 @@ cookie 및 searchParams 속성과 같은 동적 API는 전체 경로를 동적 �
 
 ## 3️⃣ 프로덕션에 들어가기 전
 
+프로덕션에 들어가기 전에 `next build`를 실행해 로컬에서 애플리케이션을 빌드하고 빌드 오류를 파악한 다음, `next start`를 실행해 프로덕션과 유사한 환경에서 애플리케이션의 성능을 측정할 수 있다.
+
+### 🧡 Core Web vitals
+
+**🔹 Lighthouse**
+시크릿 모드에서 Lighthouse를 실행하면 사용자가 실제로 사이트를 어떻게 경험하는지 더 정확하게 파악할 수 있고, 개선할 부분을 찾을 수 있다. 하지만 이는 시뮬레이션된 테스트이므로 Core Web Vitals 같은 필드 데이터와 함께 확인하는 것이 좋다.
+
+**🔹 `useReportWebVitals` hook**
+이 훅을 사용해 Core Web Vitals를 분석 툴에 전송할 수 있다.
+
+### 💛 Analyzing bundles
+
+`@next/bundle-analyzer`플러그인을 사용해 자바스크립트 번들 크기를 분석하고 애플리케이션 성능에 영향을 미칠 수 있는 대규모 모듈과 속성을 확인할 수 있다.
+
+또한, 새로운 종속성(dependencies)를 추가하는 것이 애플리케이션에 어떤 영향을 미치는지 파악할 수 있다.
+
 ## 4️⃣ 배포 후
 
 어디에 애플리케이션을 배포했는지에 따라 애플리케이션 성능을 모니터링하고 개선하는데 도움이 될 수 있는 추가적인 도구나 통합 기능에 접근할 수 있다.
+
+Vercel 배포의 경우 아래의 사항을 권장한다.
+
+**🔹 Analytics**
+기본 제공으로 분석용 대시보드를 통해 애플리케이션 트래픽, 순 방문자 수, 페이지 조회수 등을 이해하는데 도움을 준다.
+
+**🔹 Speed Insights**
+방문자 데이터를 기반으로 한 실제 성능 인사이트로, 웹사이트가 현장에서 어떻게 작동하는지에 대한 실질적인 시각을 제공한다.
+
+**🔹 Logging**
+런타임 및 활동 로그를 통해 문제를 디버깅하고. 프로덕션 환경애서 애플리케이션을 모니터링 할 수 있다.대안으로 third-party 툴을 사용하고 싶다면 [이곳](https://vercel.com/marketplace?utm_source=next-site&utm_campaign=nextjs-docs&utm_medium=docs)을 참조한다.
+
+> **✨Good to know**
+>
+> Vercel에서 실제 서비스로 배포할 때 꼭 확인해야 할 모범 사례를 자세히 알아보고, 웹사이트 성능을 높이는 효과적인 방법을 알고 싶다면 [Vercel Production Checklist](https://vercel.com/docs/production-checklist?utm_source=next-site&utm_campaign=nextjs-docs&utm_medium=docs)를 참고한다.
 
 ## 👀 추가 용어 설명
 
