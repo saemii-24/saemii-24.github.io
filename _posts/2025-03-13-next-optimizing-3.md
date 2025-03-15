@@ -87,7 +87,18 @@ cookie 및 searchParams 속성과 같은 동적 API는 전체 경로를 동적 �
 
 ### 💛 UI and accessibility
 
+**🔹Forms and Validation**
+**🔹Font Module**
+**🔹`<Image>` Component**
+**🔹`<Script>` Component**
+**🔹ESLint**
+
 ### 💚 Security
+
+**🔹Tainting**
+**🔹Server Actions**
+**🔹Environment Variables**
+**🔹Content Security Policy**
 
 ### 💙 Metadata and SEO
 
