@@ -124,7 +124,7 @@ const Resizable = () => {
             className="w-full h-1 absolute bottom-0 left-0 right-0 bg-black cursor-ns-resize"
           />
         </div>
-        <Bottom style={{ height: `calc(100% - ${topHeight}px)` }} />
+        <Bottom style={height: `calc(100% - ${topHeight}px)`} />
       </div>
     </Container>
   )
