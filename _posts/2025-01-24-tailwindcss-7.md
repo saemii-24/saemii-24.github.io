@@ -1,13 +1,13 @@
 ---
-
 title: "TailwindCSS (7) - Tailwind 4.0 업데이트 정리"
 author: saemii
-categories: - TailwindCSS
-tags: - [Next.js, TailwindCSS]
+categories:
+  - TailwindCSS
+tags:
+  - [Next.js, TailwindCSS]
 date: 2025-01-24
 last_modified_at: 2025-01-24
 pin: true
-
 ---
 
 ## 📌시작하며

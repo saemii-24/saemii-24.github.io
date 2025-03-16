@@ -1,13 +1,13 @@
 ---
-
 title: "TailwindCSS (6) - Tailwind 기능 더 알아보기"
 author: saemii
-categories: - TailwindCSS
-tags: - [Next.js, TailwindCSS]
+categories:
+  - TailwindCSS
+tags:
+  - [Next.js, TailwindCSS]
 date: 2024-11-12
 last_modified_at: 2024-11-12
 pin: true
-
 ---
 
 ## 📌시작하며

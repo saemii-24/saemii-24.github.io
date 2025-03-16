@@ -1,13 +1,13 @@
 ---
-
 title: "TailwindCSS (8) - Tailwind 추가적인 사용 방식"
 author: saemii
-categories: - TailwindCSS
-tags: - [Next.js, TailwindCSS]
+categories:
+  - TailwindCSS
+tags:
+  - [Next.js, TailwindCSS]
 date: 2025-02-27
 last_modified_at: 2025-02-27
 pin: true
-
 ---
 
 ## 📌시작하며
