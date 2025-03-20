@@ -28,19 +28,19 @@ Next.js 애플리케이션을 프로덕션으로 전환하기 전에, **사용�
 
 아래는 Next.js가 기본적으로 제공하는 최적화 목록으로, 별도로 활성화할 필요가 없다.
 
-🔹 **Server Components**
+🔹 **Server Components**<br/>
 Next.js는 기본적으로 서버 컴포넌트를 사용한다. 서버 컴포넌트는 서버에서 실행되며 클라이언트에서 렌더링하기 위해 자바스크립트가 필요하지 않기 때문에, 클라이언트 측 자바스크립트 **번들 크기에 영향을 미치지 않는다.**
 
-🔹 **Code Splitting**
+🔹 **Code Splitting**<br/>
 서버 컴포넌트를 사용하면 route segments에 따라 자동 code splitting이 가능하다. 필요한 경우에는 클라이언트 컴포넌트, 타사 라이브러리를 lazy loading 할 수도 있다.
 
-**🔹 Prefetching**
+**🔹 Prefetching**<br/>
 사용자 뷰포트에 새로운 경로로 가는 Link가 들어오면, Next.js는 백그라운드에서 해당 경로를 prefetcing 한다. 따라서, 사용자가 새로운 경로의 탐색이 즉각적으로 이루어지게 된다. 필요한 경우 프리패칭을 해제할 수 있다.
 
-**🔹 Static Rendering**
+**🔹 Static Rendering**<br/>
 Next.js는 서버에서 빌드 타임에 서버 및 클라이언트 컴포넌트를 정적으로 렌더링하고, 렌더링된 결과를 캐시하여 애플리케이션의 성능을 개선한다. 필요한 경우 특정 경로에 대해 동적 렌더링을 선택할 수 있다.
 
-**🔹 Caching**
+**🔹 Caching**<br/>
 Next.js는 데이터 요청, 서버 및 클라이언트 컴포넌트의 렌더링 결과, static assets 등을 캐시하여 서버, 데이터베이스 및 백엔드 서비스에 대한 네트워크 요청 수를 줄인다. 필요한 경우 캐싱을 해제할 수 았다.
 
 이런 기본 값은 애플리케이션 성능을 개선하고 각 네트워크 요청 시 전송되는 데이터의 양과 비용을 줄이는 것을 목표로 한다.
@@ -51,19 +51,19 @@ Next.js는 데이터 요청, 서버 및 클라이언트 컴포넌트의 렌더�
 
 ### ❤ Routing and Rendering
 
-**🔹 Layouts**
+**🔹 Layouts**<br/>
 레아이웃을 사용해 페이지 간 UI를 공유하고 페이지 이동시 부분 렌더링을 가능하게 한다.
 
-**🔹 Link 컴포넌트**
+**🔹 Link 컴포넌트**<br/>
 클라이언트 측에서 페이지를 이동하게 하거나 prefetcing을 위해 <Link> 컴포넌트를 사용한다.
 
-**🔹 Error Handling**
+**🔹 Error Handling**<br/>
 사용자 지정 오류 페이지를 생성하여 포괄적인 오류, 404 오류를 우아하게 처리하도록 한다.
 
-**🔹 Composition Patterns**
+**🔹 Composition Patterns**<br/>
 서버, 클라이언트 컴포넌트에 대한 권장하는 구성 패턴을 따르고, 클라이언트 측의 JS 번들이 불필요하게 증가하지 않도록 한다.
 
-**🔹 Dynamic APIs**
+**🔹 Dynamic APIs**<br/>
 cookie 및 searchParams 속성과 같은 동적 API는 전체 경로를 동적 렌더링으로 설정함에 주의한다.(만약 루트 레이아웃에서 사용할 경우 애플리케이션이 전체적으로 동적 렌더링이 된다.)
 본인이 동적 API를 의도적으로 사용했음을 확인하고, `<Suspense>`로 감싼다.
 
@@ -72,33 +72,33 @@ cookie 및 searchParams 속성과 같은 동적 API는 전체 경로를 동적 �
 
 ### 🧡 Data fetching and caching
 
-**🔹Server Components**
+**🔹Server Components**<br/>
 서버 컴포넌트를 사용해 서버에서 데이터를 가져올 때 얻을 수 있는 이점을 사용한다.
-**🔹Route Handlers**
+**🔹Route Handlers**<br/>
 라우터 핸들러를 사용해 클라이언트 컴포넌트에서 백엔드 리소스애 접근한다. 단 추가 서버 요청을 피하기 위해 서버 컴포넌트에서 라우트 핸들러를 호출하지 않는 것이 좋다.
-**🔹Streaming**
+**🔹Streaming**<br/>
 로딩 UI, React의 `<Suspense>`를 사용해 서버에서 클라이언트로 UI를 점진적으로 가져오도록 하여, 데이터를 가져오는 동안 전체 경로가 blocking 되는 것을 방지한다.
-**🔹Parallel Data Fetching**
+**🔹Parallel Data Fetching**<br/>
 적절한 경우 병렬로 데이터를 fetching하여 네트워크 waterfalls(지연)을 줄인다. 또한 적절한 경우 데이터를 미리 로드앟는 것도 고려할 수 있다.
-**🔹Data Caching**
+**🔹Data Caching**<br/>
 데이터 요청이 캐시되고 있는지 여부를 확인하고 가능하면 캐싱을 선택한다. 또한 fetch를 사용하지 않고 데이터를 요청하는 경우에도 캐싱이 적용되는지 확인해야 한다.
-**🔹Static Images**
+**🔹Static Images**<br/>
 `public` 디렉토리를 사용하면 애플리케이션의 static assets (이미지 등)을 자동으로 캐싱한다.
 
 ### 💛 UI and accessibility
 
-**🔹Forms and Validation**
-**🔹Font Module**
-**🔹`<Image>` Component**
-**🔹`<Script>` Component**
-**🔹ESLint**
+**🔹Forms and Validation**<br/>
+**🔹Font Module**<br/>
+**🔹`<Image>` Component**<br/>
+**🔹`<Script>` Component**<br/>
+**🔹ESLint**<br/>
 
 ### 💚 Security
 
-**🔹Tainting**
-**🔹Server Actions**
-**🔹Environment Variables**
-**🔹Content Security Policy**
+**🔹Tainting**<br/>
+**🔹Server Actions**<br/>
+**🔹Environment Variables**<br/>
+**🔹Content Security Policy**<br/>
 
 ### 💙 Metadata and SEO
 
@@ -128,13 +128,13 @@ cookie 및 searchParams 속성과 같은 동적 API는 전체 경로를 동적 �
 
 Vercel 배포의 경우 아래의 사항을 권장한다.
 
-**🔹 Analytics**
+**🔹 Analytics**<br/>
 기본 제공으로 분석용 대시보드를 통해 애플리케이션 트래픽, 순 방문자 수, 페이지 조회수 등을 이해하는데 도움을 준다.
 
-**🔹 Speed Insights**
+**🔹 Speed Insights**<br/>
 방문자 데이터를 기반으로 한 실제 성능 인사이트로, 웹사이트가 현장에서 어떻게 작동하는지에 대한 실질적인 시각을 제공한다.
 
-**🔹 Logging**
+**🔹 Logging**<br/>
 런타임 및 활동 로그를 통해 문제를 디버깅하고. 프로덕션 환경애서 애플리케이션을 모니터링 할 수 있다.대안으로 third-party 툴을 사용하고 싶다면 [이곳](https://vercel.com/marketplace?utm_source=next-site&utm_campaign=nextjs-docs&utm_medium=docs)을 참조한다.
 
 > **✨Good to know**
