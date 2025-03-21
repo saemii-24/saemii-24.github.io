@@ -243,7 +243,7 @@ Next js의 API Reference를 통해 어떻게 `next/font/google` 과 `next/font/l
 
 > subsets: 전체 글꼴 파일에서 특정 문자나 기호만을 포함하는 경량화된 폰트 파일
 
-`next/font/google`를 사용할 때, `subsets` 옵션을 통해 미리 로드하고 싶은 글꼴 서브셋을 정의할 수 있다. preload 옵션이 true로 설정되어 있다면(default값은 true), 이 서브셋의 <link rel="preload"> 태그가 <head>에 자동으로 삽입된다!
+`next/font/google`를 사용할 때, `subsets` 옵션을 통해 미리 로드하고 싶은 글꼴 서브셋을 정의할 수 있다. preload 옵션이 true로 설정되어 있다면(default값은 true), 이 서브셋의 `<link rel="preload"`> 태그가 `<head>`에 자동으로 삽입된다!
 
 폰트에 따라 지원되는 subset이 달라지기 때문에, Google Fonts의 사용 중인 글꼴 페이지에서 확인할 수 있으며, 모든 글꼴이 포함된 파일이 아니라, 필요한 서브셋만 로드해 폰트 최적화가 가능하다.
 

@@ -116,7 +116,7 @@ const Resizable = () => {
         ref={containerRef}
         className="h-[calc(100dvh-150px-12px)] mt-3 w-full bg-red-50"
       >
-        <div style={{ height: `${topHeight}px` }} className="relative w-full">
+        <div style={height: `${topHeight}px`} className="relative w-full">
           <Top />
           // Top과 Bottom을 구분하기 위한 라인
           <div
@@ -124,7 +124,7 @@ const Resizable = () => {
             className="w-full h-1 absolute bottom-0 left-0 right-0 bg-black cursor-ns-resize"
           />
         </div>
-        <Bottom style={{ height: `calc(100% - ${topHeight}px)` }} />
+        <Bottom style={height: `calc(100% - ${topHeight}px)`} />
       </div>
     </Container>
   )

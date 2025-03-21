@@ -1,13 +1,12 @@
 ---
-
 title: "에러 핸들링 - Parallel Routes"
 author: saemii
-categories: 
-tags: - [Next.js, Error]
+categories:
+tags:
+  - [Next.js, Error]
 date: 2025-02-17
 last_modified_at: 2025-02-17
 pin: true
-
 ---
 
 ## 📌시작하며
