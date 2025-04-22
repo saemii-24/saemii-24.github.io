@@ -36,7 +36,7 @@ export function AvatarOfMe() {
 
 ### 🧡Caching
 
-Next.js는 변경될 수 있으므로 public 폴더의 assets을 안전하게 캐시할 수 없습니다. 적용되는 기본 캐싱 헤더는 아래와 같다.
+Next.js는 변경될 수 있기에 public 폴더의 assets을 안전하게 캐시할 수 없다. 적용되는 기본 캐싱 헤더는 아래와 같다.
 
 ```
 Cache-Control: public, max-age=0
