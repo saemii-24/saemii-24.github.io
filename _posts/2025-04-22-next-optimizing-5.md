@@ -123,7 +123,7 @@ async headers() {
   ];
 }
 ```
-✅ 결과
+## ✅ 결과
 이제 `/public/images/profile.svg` 파일을 network 탭에서 확인했을 때, 작성했던 내용 그대로 표시되는 것을 확인할 수 있었다.
 
 >응답 코드: 200 OK
