@@ -65,6 +65,50 @@ src/
 
 beforeFiles와 afterFiles가 정확히 무엇을 의미하는 것일까? 🤔 궁금해서 찾아보니 공식문서 [rewrites](https://nextjs.org/docs/app/api-reference/config/next-config-js/rewrites) 부분에서 자세히 다루고 있었다.
 
+rewrites는 URL은 유지하면서 다른 페이지나 리소스로 routing 할 수 있게 해주는 기능이다.
+
+> ✨ 예시
+> 클라이언트가 주소창에 A라는 주소를 입력하더라도, rewrites 기능을 이용해 'A' 라고 표시는 되지만 실제로 'B' 경로에 맞는 기능을 처리한다.
+
+이 기능을 활용하기 위한 `rewrites()` 함수에서 단순한 배열이 아닌 객체 형태로 `beforeFiles`, `afterFiles`, `fallback`을 반환할 때 라우팅 순서를 정교하게 제어할 수 있다.
+
+```javascript
+module.exports = {
+  async rewrites() {
+    return {
+      beforeFiles: [
+        // beforeFiles에 작성한 경우 headers/redirects 이후에 체크되며,
+        // _next/public 파일을 포함한 모든 파일 이전에 실행된다.
+        // 즉, 기존 페이지 파일들을 덮어쓸 수 있다.
+        {
+          source: '/some-page',
+          destination: '/somewhere-else',
+          has: [{ type: 'query', key: 'overrideMe' }],
+        },
+      ],
+      afterFiles: [
+        // afterFiles에 작성한 경우 pages/public 파일들을 먼저 확인한 후,
+        // 동적 라우트(dynamically matched routes) 이전에 실행된다.
+        {
+          source: '/non-existent',
+          destination: '/somewhere-else',
+        },
+      ],
+      fallback: [
+        // 이 rewrites는 pages/public 파일과 동적 라우트를
+        // 모두 확인한 이후, 404 페이지가 렌더링되기 전에 실행된다. (즉 모든 라우팅 시도가 실패했을 때 마지막으로 실행됨)
+        {
+          source: '/:path*',
+          destination: `https://my-old-site.com/:path*`,
+        },
+      ],
+    }
+  },
+}
+
+```
+
+
 ### 📌 실행 경로 정의하기
 
 미들웨어가 실행될 경로를 정의하는 방법은 **두 가지**가 있다.
