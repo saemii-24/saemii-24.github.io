@@ -1,3 +1,15 @@
+---
+title: "react native의 코어 컴포넌트"
+author: saemii
+categories:
+  - ReactNative
+tags:
+  - [ReactNative]
+date: 2025-08-20
+last_modified_at: 2025-08-20
+pin: true
+---
+
 React Native는 앱에서 사용할 수 있는 여러 내장 코어 컴포넌트를 제공하는데, 먼저 자주사용하게 되는 Core Component부터 살펴보고자 한다.
 
 공식문서에서 설명하는 코어 컴포넌트는 다음과 같다.
@@ -112,3 +124,7 @@ ScrollView와 달리, 현재 화면에 보이는 요소만 렌더링하여 긴 �
 
 - **StatusBar**
   앱의 상태 바를 제어할 수 있는 컴포넌트이다.
+
+## 🗂️참고 사이트
+
+- <https://reactnative.dev/docs/components-and-apis>
