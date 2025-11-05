@@ -77,4 +77,69 @@ type User = {
 const user = Component<User>({ name: "신짱구", age: 5 })
 ```
 
+이제 제내릭 타입 매개변수 T가 직접 지정해준 User로 지정되며, 모든 타입 추론이 User 기준으로 작동하게 된다.
+
+```typescript
+function Component(value: User): User {
+  return value
+}
+```
+
+## 🫡 Query에서 사용하기
+
+일단 내 목표는 다음과 같다.
+
+1. 데이터가 다른 다수의 테이블을 렌더링한다.
+2. 이 때 useQuery의 상태값을 활용해 필요한 컴포넌트가 각각 렌더링 한다.
+3. 유지보수를 위해 `<QueryStatus/>` 공통 컴포넌트를 만들고 이를 구현하도록 한다.
+
+먼저 `<QueryStatus/>`를 작성한다.
+이때 data값이 달라질 수 있기 때문에 이 부분은 제네릭 매개변수를 활용한다.
+
+```typescript
+type QueryStatusProps<T> = {
+  isLoading: boolean
+  isError: boolean
+  data: T | undefined
+  children: React.ReactNode
+}
+
+function QueryStatus<T>({
+  isLoading,
+  isError,
+  data,
+  children,
+}: QueryStatusProps<T>) {
+  if (isLoading) return <Loading />
+  if (isError) return <Error />
+  if (!data || (Array.isArray(data) && data.length === 0)) return <Empty />
+  return <>{children}</>
+}
+```
+
+실제 사용은 아래와 같이 진행한다.
+
+```typescript
+export default function MemberModal() {
+  const { data, isLoading, isError } = useCreateMember()
+
+  return (
+    <>
+      <QueryStatus<User[]> isLoading={isLoading} isError={isError} data={data}>
+        <UserTable data={data!} />
+      </QueryStatus>
+    </>
+  )
+}
+```
+
+`<QueryStatus<User[]> ` 이 부분에서 `User[]`를 이용해 `T`의 타입을 지정해주고 있다.
+즉 `<QueryStatus/>` 컴포넌트에서 사용하는 data의 타입이 안전하게 지정된다.
+
+### ⭐ data!의 의미
+
+여기서 `data!` 라고 작성하는 부부은 null이 아님을 단언한다. 이미 내부 `<QueryStatus/>` 컴포넌트에서 data가 지정된 `<User[]>`외의
+null, undefined가 될 수 있는 상황, isLoading이나 isError를 모두 처리해 두었기 때문이다.
+이를 통해 `<User[]> | undefined`가 아닌 `<User[]>` 만 내려주어도 **타입 에러가 발생하지 않는다.**
+
 - <https://www.typescriptlang.org/ko/docs/handbook/2/generics.html>
