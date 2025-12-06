@@ -73,3 +73,102 @@ const formData = [
 ```
 
 ## 🍎 react hook form에 관리가 필요한 내용 전달하기
+
+### ⭐ 폼 타입 지정
+
+일단 타입을 지정하자. 타입을 어떻게 지정하면 좋을까.. 생각했는데 생각보다 간단하다.
+
+```typescript
+type DefaultValues = {
+  [key: string]: any
+}
+```
+
+### ⭐ Default Value 지정
+
+일단 어떤 값이 들어올지 모르니, key는 string으로, value는 any를 주었다. 물론 value값이 지정되어 있다면 지정해주는 것이 좋다.
+
+만약 값이 지정되어야 하는 경우라면 미리 formData(위에서 지정한 mockData)에서 받은 값을 이용해 다음과 같이 진행해주면 된다.
+
+```typescript
+const defaultValues = formData.reduce<DefaultValues>((acc, cur) => {
+  acc[cur.name] = cur.defaultValue ?? ""
+  return acc
+}, {})
+```
+
+### ⭐ Rendering 하기
+
+이제 준비는 끝났다! 미리 지정해 둔 comp를 바탕으로 렌더링 해보자.
+
+```typescript
+const FieldRegistry: any = {
+  radio: RadioField,
+  checkbox: CheckboxField,
+  select: SelectField,
+}
+
+function FormField({ field, control }: any) {
+  const Component = FieldRegistry[field.comp]
+  if (!Component) return null
+
+  return <Component field={field} control={control} />
+}
+```
+
+FieldRegistry는 컴포넌트를 값으로 가지는 객체로, formData의 comp 타입에 따라 어떤 컴포넌트를 렌더링 할지 결정하는 맵 역할을 한다.
+
+```typescript
+const FieldRegistry = {
+  radio: RadioField,
+  checkbox: CheckboxField,
+  select: SelectField,
+}
+```
+
+이를 바탕으로 FormField 컴포넌트에서 직접 컴포넌트를 렌더링 하게 된다.
+FormField를 실제로 사용하는 방식을 살펴보면 다음과 같다.
+
+```typescript
+export default function RenderFormPage() {
+  const { control, handleSubmit } = useForm({
+    defaultValues,
+  })
+
+  const onSubmit = (data: any) => console.log(data)
+
+  return (
+    <div className="flex h-screen w-screen flex-col items-center justify-center gap-10">
+      <h2 className="text-2xl font-bold">동적으로 폼 렌더링 하기</h2>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
+        {formData.map((data) => (
+          <FormField key={data.name} field={data} control={control} />
+        ))}
+
+        <button
+          type="submit"
+          className="rounded bg-blue-500 px-4 py-2 text-white"
+        >
+          제출하기
+        </button>
+      </form>
+    </div>
+  )
+}
+```
+
+### 🤨 잠깐, RHF의 control과 Controller의 역할이 뭘까?
+
+여기서 control을 내려 사용하는데 주로 register를 사용했기 때문에 이게 정확히 어떤 역할을 하는지 헷갈렸다.
+
+정리하자면 다음과 같다.
+
+- control
+  - RHF 내부 상태를 관리하는 폼 관리자
+- Controller
+
+  - RHF가 직접 제어할 수 없는 컴포넌트를 RHF에 연결해주는 어댑터
+
+- <https://react-hook-form.com/docs/useform/control>
+- <https://react-hook-form.com/docs/usecontroller/controller>
