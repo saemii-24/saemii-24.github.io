@@ -158,17 +158,38 @@ export default function RenderFormPage() {
 }
 ```
 
-### 🤨 잠깐, RHF의 control과 Controller의 역할이 뭘까?
+## 🤨 잠깐, RHF의 control과 Controller의 역할이 뭘까?
 
 여기서 control을 내려 사용하는데 주로 register를 사용했기 때문에 이게 정확히 어떤 역할을 하는지 헷갈렸다.
 
-정리하자면 다음과 같다.
+일단 기본적으로 RHF는 register 된 input을 제어할 수 있다. 하지만 RHF가 직접 컨트롤 할 수 없는 제어 컴포넌트 또한 분명히 존재한다. 이 때 필요한 것이 control + Controller 조합이다.
+
+### 🍊control과 Controller
 
 - control
-  - RHF 내부 상태를 관리하는 폼 관리자
-- Controller
+  control은 RHF의 상태 관리 객체로 폼 필드 값을 저장하고, dirty, touched, errors와 같은 상태를 보관한다.
 
-  - RHF가 직접 제어할 수 없는 컴포넌트를 RHF에 연결해주는 어댑터
+- Controller
+  Controller는 RHF가 직접 조작할 수 없는 컴포넌트를 RHF가 관리할 수 있도록 하는 어댑터 역할을 한다.
+
+  ```typescript
+  <Controller
+    control={control}
+    name="fruits"
+    render={({ field }) => <Select {...field} options={fruitsOptions} />}
+  />
+  ```
+
+  Controller를 작성하고 render 안에 필요한 form 관련 컴포넌트를 작성하는데 이때 field를 함께 전달해야 한다.
+  field가 가지고 있는 값은 다음과 같다.
+
+- value
+- onChange
+- onBlur
+- ref
+
+즉 register가 하던 역할을 Controller를 통해 우리가 직접 수동 연결하게 되는 것이다.
+기본적으로는 register를 사용하는 것이 더 가볍다고 알려져 있으나, 라이브러리 등을 사용하면서 register로 접근이 불가능 할 때 Controller를 이용해 RHF을 계속 사용할 수 있다. 👍
 
 - <https://react-hook-form.com/docs/useform/control>
 - <https://react-hook-form.com/docs/usecontroller/controller>
