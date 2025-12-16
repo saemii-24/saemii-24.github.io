@@ -1,6 +1,6 @@
 ---
 title: "React-Hook-Form(3) - 동적으로 폼이 바뀌어야 하는 경우"
-author: saemii
+author: saemii-24
 categories:
   - Library
 tags:

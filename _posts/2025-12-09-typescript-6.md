@@ -1,6 +1,6 @@
 ---
 title: "any와 unknown 타입에 대해서"
-author: saemii
+author: saemii-24
 categories:
   - Typescript
 tags:
@@ -139,6 +139,8 @@ if (typeof value === "object" && value !== null && "price" in value) {
 ```
 
 이런 방법을 통해 unknown을 안전하게 사용할 수 있다.
+
+## 🎁참고 사이트
 
 - <https://www.typescriptlang.org/ko/play/?#example/any>
 - <https://www.typescriptlang.org/ko/play/?#example/unknown-and-never>
