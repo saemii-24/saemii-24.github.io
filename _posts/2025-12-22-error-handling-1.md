@@ -1,7 +1,19 @@
-# Maximum call 탈출기
+---
+title: "에러 핸들링 - Maximum call 탈출기"
+author: saemii-24
+categories:
+  - Next.js
+tags:
+  - [Next.js]
+date: 2025-12-22
+last_modified_at: 2025-12-22
+pin: true
+---
+
+# 😨 Maximum call 탈출기
 
 바야흐로 `video` 태그를 이용해 자체 비디오 플레이어를 만들던 평화로운 어느날, 배포를 하고 살펴보니 갑자기 maximum call이 나오며 페이지가 로딩이 안되는 상황이 발생했다. 😱
-마감 일정은 앞당겨오지, 해당 컴포넌트는 이미 많은 로직이 작성되어 있지 원인은 파악 되었지만 이걸 대체할 방법은 또 모르겠는..
+마감 일정은 앞당겨오지, 해당 컴포넌트는 이미 많은 로직이 작성되어 있지, 원인은 파악 되었지만 이걸 대체할 방법은 또 모르겠는.. 😱😱
 그런 상황을 겪다가 결국 해결을 하게 되어서 그 탈출기를 작성하고자 한다.
 
 파악한 문제점은 다음과 같았다.
@@ -44,3 +56,68 @@ useEffect(() => {
 ```
 
 이 코드는 기존에 문제를 일으켰던 코드로, currentTime 변화마다 useEffect에서 비디오의 실제 시간을 강제로 설정했었다.
+
+```typescript
+//실제 이동해야 하는 '초'를 time으로 작성한다.
+const commandJumpTo = (time: number) => {
+  videoPlayerRef.current?.executeJumpTo(time)
+}
+```
+
+```typescript
+const executeJumpTo = React.useCallback(
+  (time: number) => {
+    const el = videoRef.current
+    if (!el) return
+
+    const max =
+      Number.isFinite(duration) && duration > 0
+        ? duration
+        : el.duration || Infinity
+
+    const clamped = Math.min(Math.max(time, 0), max)
+
+    el.currentTime = clamped // 실제 video 요소의 재생 시간을 즉시 변경한다
+    setCurrentTime(clamped) // UI 렌더링에서 사용해야 하는 현재 시간을 React 상태로 동기화
+  },
+  [duration, setCurrentTime]
+)
+```
+
+그리고 가장 중요한 내용!
+`VideoPlayer` component는 `ref`를 **받는다.** 이 `ref`는 `<video/>`태그에 **연결하기 위해서가 아니라**
+`forwardRef`와 `useImperativeHandle`을 사용해 외부에서 호출 가능한 명령형 API를 노출하기 위해 사용된다.
+
+```typescript
+useImperativeHandle(ref, () => ({
+  executeJumpTo,
+}))
+```
+
+다음과 같이 작성하여 ref.current가 DOM을 조작하기 위한 객체가 아니라 `{executeJumpTo}` 라는 객체를 가리키게 된다.
+
+정리하자면 다음과 같다. `useImperativeHandle`과 `forwardRef`를 이용해 부모에서 ref를 내려주는 이유는
+자식 컴포넌트 내부에 있는 함수를 props로 내려받거나 상태를 건드리는 게 아니라, ref를 통해 의도적으로 노출한 함수만 직접 실행하기 위한 구조를 만들기 위해서다.
+
+이를 통해, 서로의 함수를 다시 호출하는 형태로 발생하게 되는 maximum call stack 문제를 피하고, 명령형 제어만 분리할 수 있는 구조를 만들 수 있다.
+
+또한 내 `VideoPlayer`는 10초 앞 뒤로 이동하는 형태도 있는데, 이 함수들은 `VideoPlayer` 내부에 위치해있었다.
+과거에는 이를 setCurrentTime을 이용해 작성하였으나 이 또한 실제 영상 재생시간의 변동은 `executeJumpTo`를 이용할 수 있도록 다음과 같이 변경해주었다.
+
+```typescript
+// -10초
+const skipBackward = React.useCallback(() => {
+  const el = videoRef.current
+  if (!el) return
+
+  executeJumpTo(el.currentTime - 10)
+}, [executeJumpTo])
+
+// +10초
+const skipForward = React.useCallback(() => {
+  const el = videoRef.current
+  if (!el) return
+
+  executeJumpTo(el.currentTime + 10)
+}, [executeJumpTo])
+```
