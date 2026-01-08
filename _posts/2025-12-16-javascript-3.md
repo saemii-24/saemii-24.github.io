@@ -40,11 +40,106 @@ at은 또한 string에도 적용 가능하다.
 "Hello".at(-1) // 'o'
 ```
 
-## 💁‍♀️ 마무리
+## 💖 Promise
 
-지금까지 낯설지만 편리한 새로운 syntax들에 대해 알아보았다. 재미이쓴
-그렇다고 여기 정리된 모든 기능을 다 쓸 수 있는 것은 아니다. 최신 문법일 수록 브라우저 호환성을 확인하고 작성해야 함에 유의하자.
+이번엔 API를 다루면서 많이 보게 된 프로미스 관련 내용을 알아보자.
+
+api 호출할 때 사용하는 fetch의 경우 이미 Promise를 만들어서 return하기 때문에 직접적으로 Promise를 코드에 명시하는 일이 많지는 않아짔만,
+쵝느에 하나의 파이프라인 안에서 여러개의 프로미스를 다룰일이 생기다 보니 익숙해지는 편이 좋겠다는 생각을 했다.
+
+**Promise**란 지금은 결과가 없지만 나중에 결과가 생길 일을 약속하는 객체로,
+
+1. 성공 (resolve(value))
+2. 실패 (reject(error))
+   결과는 위와 같은 두 가지 만이 존재한다.
+
+### 프로미스 생성하기
+
+프로미스는 아래와 같이 생성할 수 있다. 이 함수의 경우 성공할 경우 resolve를, 실패할 경우 reject를 내뱉으며, 비동기 작업을 시작시키기 위해 콜백을 받는다.
+
+```javascript
+const promise1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("foo")
+  }, 300)
+})
+
+promise1.then((value) => {
+  console.log(value)
+})
+```
+
+```javascript
+const promise1 = Promise.resolve(3)
+const promise2 = 42
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, "foo")
+})
+
+Promise.all([promise1, promise2, promise3]).then((values) => {
+  console.log(values)
+})
+```
+
+## Promise.all()
+
+여러 Promise를 **동시**에 실행하고, 하나라도 실패하면 즉시 **전체를 실패**로 만든다
+
+```javascript
+Promise.all([p1, p2, p3])
+```
+
+- p1 ✅
+- p2 ❌ ← 여기서 바로 **전체** 실패
+- p3 ⏳ (결과 기다리지 않음)
+
+```javascript
+Promise.all([fetch("/a"), fetch("/b"), fetch("/c")])
+  .then(([a, b, c]) => {
+    // 전부 성공했을 때만 실행
+  })
+  .catch((err) => {
+    // 하나라도 실패하면 전체 실패로 간주. catch가 실행 됨
+  })
+```
+
+## Promise.allSettled()
+
+모든 Promise가 끝날 때까지 기다리고, 성공/실패 결과를 전부 알려준다
+
+```javascript
+Promise.allSettled([p1, p2, p3])
+```
+
+다음과 같이 실행되었을 때 만약 P2가 실패했다면, 아래와 같은 값을 반환한다.
+
+```javascript
+;[
+  { status: "fulfilled", value: "결과값" },
+  { status: "rejected", reason: "에러" },
+  { status: "fulfilled", value: "결과값" },
+]
+```
+
+```javascript
+const results = await Promise.allSettled([
+  fetch("/a"),
+  fetch("/b"),
+  fetch("/c"),
+])
+
+results.forEach((r) => {
+  if (r.status === "fulfilled") {
+    console.log("성공", r.value)
+  } else {
+    console.log("실패", r.reason)
+  }
+})
+```
+
+> ⭐ 이러한 특징을 사용해 여러 api가 엮여있는 파일 업로드 + 각 status를 알리는 UX를 구성할 수 있었다.
 
 ## 🎁참고 사이트
 
 - <https://www.w3schools.com/js/js_versions.asp>
+- <https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise/all>
