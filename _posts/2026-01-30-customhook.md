@@ -14,9 +14,9 @@ pin: true
 
 ## ⭐ useParameter
 
-쉽게 url의 parameter를 set하고 get 하는 커스텀 훅으로, `router.push`를 통해 히스토리를 남긴다.
+단계별로 테이브을 다루고 있는데, 이 때 사용자 편의성을 위해 히스토리를 유지하면서 상태를 반영해야 하는 경우가 자주 발생한다.
 
-스텝이 여러개이며, 뒤로가기 할 때 해당 데이터를 유지해야 하는 경우에 주로 사용했다.
+이를 위해 아래와 같은 커스텀 훅을 만들었다.
 
 ```typescript
 "use client"
@@ -51,3 +51,16 @@ export function useParameter() {
   }
 }
 ```
+
+### ⚙️ 훅의 동작 방식
+
+- **getParameter**
+
+1. 현재 URL의 query string에서 특정 key의 값을 조회한다.
+2. 값이 없을 경우 null을 반환한다.
+
+- **setParameter**
+
+1. 기존 query parameter를 유지한 채, 특정 key의 값을 추가·수정·삭제한다.
+2. router.push를 사용하기 때문에 브라우저 히스토리가 남는다.
+3. value가 null인 경우 해당 parameter를 URL에서 제거한다.
