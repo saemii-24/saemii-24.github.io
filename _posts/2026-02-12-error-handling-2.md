@@ -1,3 +1,15 @@
+---
+title: "에러 핸들링 - 파일 업로드와 CORS"
+author: saemii-24
+categories:
+  - HTML, React
+tags:
+  - [HTML]
+date: 2026-02-13
+last_modified_at: 2026-02-13
+pin: true
+---
+
 # Presigned URL 업로드 중 CORS 에러 발생
 
 회사에서 사용 중인 스토리지에 presigned URL로 파일 업로드를 구현하던 중 이상한 현상을 겪었다.🙄
